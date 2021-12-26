@@ -14,7 +14,23 @@ export const meta: MetaFunction = () => {
 };
 
 export const links: LinksFunction = () => {
-  return [{ rel: 'stylesheet', href: styles }];
+  return [
+    { rel: 'stylesheet', href: styles },
+    {
+      rel: 'preload',
+      as: 'font',
+      href: '/fonts/Montserrat/Montserrat-Medium.woff2',
+      type: 'font/woff2',
+      crossOrigin: 'anonymous',
+    },
+    {
+      rel: 'preload',
+      as: 'font',
+      href: '/fonts/Montserrat/Montserrat-Medium.woff',
+      type: 'font/woff',
+      crossOrigin: 'anonymous',
+    },
+  ];
 };
 
 export default function App() {
@@ -29,7 +45,7 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body>
+      <body className="bg-gray-default font-montserrat">
         <main>
           <Outlet />
         </main>

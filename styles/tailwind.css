@@ -2,5 +2,5 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer components {
+@layer base {
 }
