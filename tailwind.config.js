@@ -21,6 +21,7 @@ module.exports = {
       fontFamily: {
         sans: [
           'Montserrat',
+          'sans-serif',
           ...defaultTheme.fontFamily.sans,
         ],
       },

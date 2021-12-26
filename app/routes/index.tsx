@@ -1,11 +1,9 @@
 export default function Index() {
   return (
     <div className="text-white text-3xl">
-      Lorem ipsum dolor sit amet consectetur adipisicing
-      elit. Nihil dignissimos quos, doloribus excepturi non
-      voluptatum consequuntur aspernatur dolorum sapiente.
-      Architecto quas voluptatibus iure asperiores magni
-      nisi quibusdam facere, hic fuga.
+      For typing, the sk620 is a dream. Made with the typing
+      experience in mind, this keyboard offers satisfying
+      sound, feel, and aesthetics.
     </div>
   );
 }
