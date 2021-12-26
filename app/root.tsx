@@ -47,7 +47,7 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body className="bg-gray-default">
+      <body className="bg-gray-700">
         <main className="max-w-7xl m-auto w-100 text-white">
           <div className="flex justify-start items-start gap-4 p-10">
             <Sidebar />
