@@ -25,7 +25,9 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <Outlet />
+        <main>
+          <Outlet />
+        </main>
         <ScrollRestoration />
         <Scripts />
         {process.env.NODE_ENV === 'development' && (
