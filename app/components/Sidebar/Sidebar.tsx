@@ -9,6 +9,7 @@ import {
   ProfileIcon,
   SettingsIcon,
 } from '../Icons';
+import { DropdownItem } from './DropdownItem';
 import { Link } from './Link';
 
 export function Sidebar() {
@@ -69,7 +70,7 @@ export function Sidebar() {
             <DropdownMenu.Label className="text-slate-700 text-xs px-2">
               <span>Options</span>
             </DropdownMenu.Label>
-            <DropdownMenu.Item className="hover:cursor-pointer hover:bg-violet-700 focus:outline-none focus:bg-violet-700 rounded-md text-gray-300">
+            <DropdownItem>
               <div className="py-1 px-2 min-w-200 w-full flex justify-between items-center text-sm">
                 <span>Profile</span>
                 <ProfileIcon
@@ -77,8 +78,8 @@ export function Sidebar() {
                   className="w-5 h-5"
                 />
               </div>
-            </DropdownMenu.Item>
-            <DropdownMenu.Item className="hover:cursor-pointer hover:bg-violet-700 focus:outline-none focus:bg-violet-700 rounded-md text-gray-300">
+            </DropdownItem>
+            <DropdownItem>
               <div className="py-1 px-2 min-w-200 w-full flex justify-between items-center text-sm">
                 <span>Settings</span>
                 <SettingsIcon
@@ -86,9 +87,9 @@ export function Sidebar() {
                   className="w-5 h-5"
                 />
               </div>
-            </DropdownMenu.Item>
+            </DropdownItem>
             <DropdownMenu.Separator className="bg-white w-full h-px my-2 bg-white-10" />
-            <DropdownMenu.Item className="focus:outline-none hover:bg-violet-700 focus:bg-violet-700 hover:cursor-pointer rounded-md text-gray-300">
+            <DropdownItem>
               <div className="px-2 py-1 min-w-200 w-full flex justify-between items-center text-sm">
                 <span>Logout</span>
                 <LogoutIcon
@@ -96,7 +97,7 @@ export function Sidebar() {
                   className="w-5 h-5"
                 />
               </div>
-            </DropdownMenu.Item>
+            </DropdownItem>
             <DropdownMenu.Arrow className="fill-black-default" />
           </DropdownMenu.Content>
         </DropdownMenu.Root>
