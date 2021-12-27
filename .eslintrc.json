@@ -21,9 +21,12 @@
   "plugins": ["react", "@typescript-eslint"],
   "rules": {
     "arrow-body-style": "off",
+    "import/prefer-default-export": "off",
     "comma-dangle": "off",
+    "@typescript-eslint/comma-dangle": ["off"],
     "prefer-template": "off",
     "react/react-in-jsx-scope": "off",
+    "react/jsx-props-no-spreading": [0],
     "react/jsx-filename-extension": [
       2,
       { "extensions": [".js", ".jsx", ".ts", ".tsx"] }
