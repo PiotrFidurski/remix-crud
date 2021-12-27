@@ -3,7 +3,7 @@ import {
   HamburgerIcon,
   HomeIcon,
   PlusIcon,
-  ProfileIcon
+  ProfileIcon,
 } from '~/assets/icons';
 import Button from '../Elements/Button';
 import ListItem from '../Elements/ListItem';

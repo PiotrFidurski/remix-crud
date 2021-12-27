@@ -11,6 +11,7 @@
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
+    "tsconfigRootDir": ".",
     "project": "./tsconfig.json",
     "ecmaFeatures": {
       "jsx": true
@@ -18,8 +19,9 @@
     "ecmaVersion": 12,
     "sourceType": "module"
   },
-  "plugins": ["react", "@typescript-eslint"],
+  "plugins": ["react", "@typescript-eslint", "import"],
   "rules": {
+    "import/no-unresolved": "error",
     "arrow-body-style": "off",
     "import/prefer-default-export": "off",
     "comma-dangle": "off",
@@ -31,5 +33,16 @@
       2,
       { "extensions": [".js", ".jsx", ".ts", ".tsx"] }
     ]
+  },
+  "settings": {
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
+    },
+    "import/resolver": {
+      "typescript": {
+        "alwaysTryTypes": true,
+        "project": "."
+      }
+    }
   }
 }
