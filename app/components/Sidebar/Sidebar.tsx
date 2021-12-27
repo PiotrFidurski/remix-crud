@@ -1,5 +1,6 @@
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { Button, ListItem } from '../Elements';
+import { DropdownItem } from '../Elements/DropdownItem';
 import {
   DotsHorizontalIcon,
   HamburgerIcon,
@@ -9,7 +10,6 @@ import {
   ProfileIcon,
   SettingsIcon,
 } from '../Icons';
-import { DropdownItem } from './DropdownItem';
 import { Link } from './Link';
 
 export function Sidebar() {
