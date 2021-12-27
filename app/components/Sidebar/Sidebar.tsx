@@ -56,7 +56,7 @@ export function Sidebar() {
           </div>
           <span className="text-gray-300">Chimson</span>
         </div>
-        <DropdownMenu.Root defaultOpen>
+        <DropdownMenu.Root>
           <DropdownMenu.Trigger asChild>
             <Button>
               <DotsHorizontalIcon />
