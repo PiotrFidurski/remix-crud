@@ -36,7 +36,7 @@ export default function IndexRoute() {
     <div className="flex flex-col gap-4 bg-gray-900 rounded-md px-4 py-8">
       {data.map((post: any) => (
         <Link key={post.id} to={`/posts/${post.id}`}>
-          <article className="bg-gray-default rounded-md px-4 py-4">
+          <article className="rounded-md px-4 py-4">
             <h1 className="text-gray-600 font-bold text-3xl py-4">
               {post.title}
             </h1>

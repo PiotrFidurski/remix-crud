@@ -20,12 +20,12 @@ export default function UsernameRoute() {
       </h1>
       <div className="w-full flex justify-between gap-4 pb-4">
         <Link to="./" className="flex-1">
-          <div className="bg-gray-default rounded-md px-4 py-4 font-bold">
+          <div className="rounded-md px-4 py-4 font-bold">
             Posts
           </div>
         </Link>
         <Link to="edit" className="flex-1">
-          <div className="bg-gray-default rounded-md px-4 py-4 font-bold">
+          <div className="rounded-md px-4 py-4 font-bold">
             Edit
           </div>
         </Link>
