@@ -3,7 +3,7 @@ import clsx from 'clsx';
 export type ListItemProps =
   React.LiHTMLAttributes<HTMLLIElement>;
 
-export default function ListItem({
+export function ListItem({
   children,
   className,
   ...props

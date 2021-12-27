@@ -5,8 +5,7 @@ import {
   PlusIcon,
   ProfileIcon,
 } from '~/assets/icons';
-import Button from '../Elements/Button';
-import ListItem from '../Elements/ListItem';
+import { Button, ListItem } from '../Elements';
 import { Link } from './Link';
 
 export function Sidebar() {

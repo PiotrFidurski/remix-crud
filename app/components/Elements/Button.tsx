@@ -3,7 +3,7 @@ import cslx from 'clsx';
 export type ButtonProps =
   React.ButtonHTMLAttributes<HTMLButtonElement>;
 
-export default function Button({
+export function Button({
   children,
   className,
   ...props
