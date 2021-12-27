@@ -8,7 +8,7 @@ import {
   Scripts,
   ScrollRestoration,
 } from 'remix';
-import Sidebar from './components/Sidebar';
+import { Sidebar } from './components/Sidebar';
 import styles from './tailwind.css';
 
 export const meta: MetaFunction = () => {
@@ -47,11 +47,13 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body className="bg-gray-700">
+      <body className="bg-indigo-default">
         <main className="max-w-7xl m-auto w-100 text-white">
-          <div className="flex justify-start items-start gap-4 p-10">
+          <div className="grid grid-cols-4 gap-4 p-10">
             <Sidebar />
-            <Outlet />
+            <div className="col-span-3 ">
+              <Outlet />
+            </div>
           </div>
         </main>
         <ScrollRestoration />
