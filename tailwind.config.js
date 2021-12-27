@@ -8,6 +8,12 @@ module.exports = {
         tiny: '0.15rem',
       },
       colors: {
+        gray: {
+          dark: '#121212',
+        },
+        black: {
+          default: '#080606',
+        },
         error: '#B40023',
         white: {
           10: 'rgba(255 255 255 / 10%)',

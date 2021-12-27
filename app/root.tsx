@@ -47,7 +47,7 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body className="bg-indigo-default">
+      <body className="bg-black-default">
         <main className="max-w-7xl m-auto w-100 text-white">
           <div className="grid grid-cols-4 gap-4 p-10">
             <Sidebar />

@@ -22,6 +22,7 @@
   "plugins": ["react", "@typescript-eslint", "import"],
   "rules": {
     "import/no-unresolved": "error",
+    "@typescript-eslint/indent": "off",
     "arrow-body-style": "off",
     "import/prefer-default-export": "off",
     "comma-dangle": "off",
