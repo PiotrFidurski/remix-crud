@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { IconProps } from './types';
 
 export function DotsHorizontalIcon({
-  className
+  className,
 }: IconProps) {
   return (
     <svg

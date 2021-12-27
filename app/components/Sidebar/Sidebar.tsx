@@ -1,11 +1,11 @@
+import { Button, ListItem } from '../Elements';
 import {
   DotsHorizontalIcon,
   HamburgerIcon,
   HomeIcon,
   PlusIcon,
   ProfileIcon,
-} from '~/assets/icons';
-import { Button, ListItem } from '../Elements';
+} from '../Icons';
 import { Link } from './Link';
 
 export function Sidebar() {
