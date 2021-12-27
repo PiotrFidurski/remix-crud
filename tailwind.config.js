@@ -29,8 +29,14 @@ module.exports = {
       minHeight: {
         900: '900px',
       },
+      minWidth: {
+        200: '200px',
+      },
       maxWidth: {
-        76: '76',
+        76: '76px',
+      },
+      dropShadow: {
+        light: '0 1px 5px rgba(255 255 255 / 0.10)',
       },
     },
   },
