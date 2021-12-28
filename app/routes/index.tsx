@@ -31,7 +31,7 @@ export default function IndexRoute() {
   const data = useLoaderData();
 
   return (
-    <div className="flex flex-col gap-4 rounded-md px-4">
+    <div className="flex flex-col gap-4 rounded-md">
       {data.map((post: any) => (
         <Post key={post.id} post={post} />
       ))}
