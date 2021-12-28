@@ -27,14 +27,16 @@ module.exports = {
         ],
       },
       minHeight: {
-        600: '600px',
         100: '100px',
+        200: '200px',
+        600: '600px',
       },
       minWidth: {
         200: '200px',
       },
       maxWidth: {
         76: '76px',
+        200: '200px',
       },
       dropShadow: {
         light: '0 1px 5px rgba(255 255 255 / 0.10)',
