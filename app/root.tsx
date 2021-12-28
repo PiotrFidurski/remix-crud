@@ -49,9 +49,11 @@ export default function App() {
       </head>
       <body className="bg-gray-dark">
         <main className="max-w-7xl m-auto w-100 text-white">
-          <div className="grid grid-cols-4 gap-4 p-10">
-            <Sidebar />
-            <div className="col-span-3 ">
+          <div className="grid grid-cols-4 gap-2 sm:p-10 p-0">
+            <div className="lg:col-span-1 col-span-4 h-20">
+              <Sidebar />
+            </div>
+            <div className="col-span-4 lg:col-span-3">
               <Outlet />
             </div>
           </div>

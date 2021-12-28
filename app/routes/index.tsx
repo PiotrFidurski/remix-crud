@@ -27,7 +27,7 @@ export default function IndexRoute() {
   const data = useLoaderData();
 
   return (
-    <div className="flex flex-col gap-4rounded-md px-4 py-8">
+    <div className="flex flex-col gap-4rounded-md px-4">
       {data.map((post: any) => (
         <Link key={post.id} to={`/posts/${post.id}`}>
           <article className="rounded-md px-4 py-4">

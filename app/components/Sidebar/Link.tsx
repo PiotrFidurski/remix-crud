@@ -25,10 +25,10 @@ export function Link({
           className={
             isActive
               ? clsx(
-                  'bg-violet-700 justify-center sm:justify-start flex gap-2 w-full text-gray-300 rounded-md py-2 px-2',
+                  'bg-violet-700 justify-start flex gap-2 w-full text-gray-300 rounded-md py-2 px-2',
                   activeClass
                 )
-              : 'py-2 px-2 flex justify-center sm:justify-start gap-2 w-full text-gray-300'
+              : 'py-2 px-2 flex justify-start gap-2 w-full text-gray-300'
           }
         >
           {children}
