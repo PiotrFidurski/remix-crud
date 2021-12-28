@@ -41,7 +41,7 @@ export default function Dropdown() {
           </div>
         </DropdownItem>
         <DropdownMenu.Separator className="bg-white w-full h-px my-2 bg-white-10" />
-        <DropdownItem>
+        <DropdownItem className="hover:bg-error focus:bg-error">
           <div className="px-2 py-1 min-w-200 w-full flex justify-between items-center text-sm">
             <span>Logout</span>
             <LogoutIcon
