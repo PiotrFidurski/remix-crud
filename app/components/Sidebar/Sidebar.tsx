@@ -75,7 +75,7 @@ export function Sidebar() {
             </Link>
           </ListItem>
           <ListItem>
-            <Link to="new">
+            <Link to="/posts/new">
               <PlusIcon aria-hidden="true" />
               <span className="mt-tiny">New Post</span>
             </Link>

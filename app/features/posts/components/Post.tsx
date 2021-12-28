@@ -37,12 +37,12 @@ export function Post({ post }: PostProps) {
           alt="user-avatar"
           src="https://images.unsplash.com/photo-1640389085228-323113fae2cd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=700&q=80"
         />
-        <div className="py-4 px-4">
-          <Link to={`/posts/${post.id}`}>
-            <h1 className="text-violet-300 font-bold text-xl pb-2">
+        <div className="py-4 px-4 w-auto">
+          <h1 className="text-violet-300 font-bold text-xl pb-2">
+            <Link to={`/posts/${post.id}`}>
               {post.title}
-            </h1>
-          </Link>
+            </Link>
+          </h1>
           <p className="text-gray-300">{post.content}</p>
         </div>
       </div>
