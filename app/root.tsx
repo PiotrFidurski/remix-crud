@@ -50,7 +50,7 @@ export default function App() {
       <body className="bg-gray-dark">
         <main className="max-w-7xl m-auto w-100 text-white">
           <div className="grid grid-cols-4 gap-2 sm:p-10 p-0">
-            <div className="lg:col-span-1 col-span-4">
+            <div className="lg:col-span-1 col-span-4 h-20">
               <Sidebar />
             </div>
             <div className="col-span-4 lg:col-span-3">

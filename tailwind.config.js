@@ -28,6 +28,7 @@ module.exports = {
       },
       minHeight: {
         600: '600px',
+        100: '100px',
       },
       minWidth: {
         200: '200px',
@@ -43,6 +44,9 @@ module.exports = {
       },
       gridRow: {
         none: 'none',
+      },
+      visivility: {
+        collapse: 'collapse',
       },
     },
   },
