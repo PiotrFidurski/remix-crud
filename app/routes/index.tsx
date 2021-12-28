@@ -1,5 +1,5 @@
 import { LoaderFunction, useLoaderData } from 'remix';
-import { Post } from '~/features/posts/Post';
+import { Post } from '~/features/posts/components/Post';
 
 export const loader: LoaderFunction = async () => {
   return [

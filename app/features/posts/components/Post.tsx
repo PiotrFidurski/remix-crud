@@ -1,7 +1,6 @@
 import { formatDistanceToNow } from 'date-fns';
 import { Link } from 'remix';
-import { Button } from '~/components/Elements';
-import { DotsHorizontalIcon } from '~/components/Icons';
+import Dropdown from './Dropdown';
 
 export type PostProps = {
   post: {
@@ -30,9 +29,7 @@ export function Post({ post }: PostProps) {
             })}
           </p>
         </div>
-        <Button>
-          <DotsHorizontalIcon />
-        </Button>
+        <Dropdown />
       </div>
       <div className="flex gap-2">
         <img
@@ -40,7 +37,6 @@ export function Post({ post }: PostProps) {
           alt="user-avatar"
           src="https://images.unsplash.com/photo-1640389085228-323113fae2cd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=700&q=80"
         />
-
         <div className="py-4 px-4">
           <Link to={`/posts/${post.id}`}>
             <h1 className="text-violet-300 font-bold text-xl pb-2">
