@@ -24,7 +24,6 @@ export default function Dropdown() {
         <DropdownMenu.Label className="text-slate-700 text-xs px-2">
           <span>Options</span>
         </DropdownMenu.Label>
-
         <DropdownMenu.Separator className="bg-white w-full h-px my-2 bg-white-10" />
         <DropdownItem>
           <div className="px-2 py-1 min-w-200 w-full flex justify-between items-center text-sm">
