@@ -18,12 +18,12 @@ export function Post({ post }: PostProps) {
       className="rounded-md bg-black-default border border-white-10"
     >
       <div className="flex items-center justify-between border-b border-white-10 px-4">
-        <div className="flex items-center py-4">
+        <div className="flex items-center py-4 min-w-0">
           <Link to="chimson" className="text-gray-300">
             Chimson
           </Link>
           <span className="px-2 text-slate-600">·</span>
-          <p className="text-gray-300 mt-tiny">
+          <p className="text-gray-300 mt-px truncate text-ellipsis overflow-hidden">
             {formatDistanceToNow(new Date(post.createdAt), {
               addSuffix: true,
             })}
@@ -33,9 +33,9 @@ export function Post({ post }: PostProps) {
       </div>
       <div className="flex gap-2">
         <img
-          className="object-cover rounded-bl max-w-200 w-full"
-          alt="user-avatar"
-          src="https://images.unsplash.com/photo-1640389085228-323113fae2cd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=700&q=80"
+          className="object-cover rounded-bl max-w-200 w-full hidden lg:block"
+          alt="husky with a santa hat"
+          src="/images/xmasdog.png"
         />
         <div className="py-4 px-4 w-auto">
           <h1 className="text-violet-300 font-bold text-xl pb-2">

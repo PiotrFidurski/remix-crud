@@ -11,7 +11,7 @@ export default function Dropdown() {
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>
-        <Button>
+        <Button className="border-transparent">
           <DotsHorizontalIcon />
         </Button>
       </DropdownMenu.Trigger>

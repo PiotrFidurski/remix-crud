@@ -7,7 +7,8 @@
   "extends": [
     "plugin:react/recommended",
     "airbnb",
-    "airbnb-typescript"
+    "airbnb-typescript",
+    "prettier"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -23,7 +24,6 @@
   "rules": {
     "import/no-unresolved": "error",
     "@typescript-eslint/indent": "off",
-    "react/prop-types": "off",
     "arrow-body-style": "off",
     "import/prefer-default-export": "off",
     "comma-dangle": "off",

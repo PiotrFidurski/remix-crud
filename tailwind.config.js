@@ -4,9 +4,6 @@ module.exports = {
   content: ['./app/**/*.{ts,tsx}'],
   theme: {
     extend: {
-      margin: {
-        tiny: '0.15rem',
-      },
       colors: {
         gray: {
           dark: '#121212',
@@ -32,6 +29,7 @@ module.exports = {
         600: '600px',
       },
       minWidth: {
+        180: '180px',
         200: '200px',
       },
       maxWidth: {
