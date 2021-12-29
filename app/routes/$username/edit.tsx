@@ -1,49 +1,41 @@
 import { Form } from 'remix';
+import { Button } from '~/components/Elements';
+import {
+  InputField,
+  TextareaField,
+} from '~/components/Form';
 
 export default function UsernameEditRoute() {
   return (
-    <div>
-      <Form className="flex flex-col gap-4">
-        <div className="flex flex-col">
-          <label htmlFor="username">
-            <span>username</span>
-            <input
-              className="text-sm leading-5 w-full py-2 px-3
-              border-2 text-gray-500 rounded-lg shadow-sm
-              focus:outline-none focus:ring dark:text-gray-400
-            placeholder:text-gray-600 bg-gray-900
-            border-indigo-500 focus:ring-indigo-900
-            focus:border-indigo-600"
-              name="username"
-              id="username"
-            />
-          </label>
-        </div>
-        <div className="flex flex-col">
-          <label htmlFor="bio">
-            <span>bio</span>
-            <input
-              className="text-sm leading-5 w-full py-2 px-3
-               border-2 text-gray-500 rounded-lg shadow-sm
-               focus:outline-none focus:ring dark:text-gray-400
-             placeholder:text-gray-600 bg-gray-900
-             border-indigo-500 focus:ring-indigo-900
-             focus:border-indigo-600"
-              name="bio"
-              id="bio"
-            />
-          </label>
-        </div>
-        <div>
-          <button
-            className="my-2 bg-indigo-500 shadow-lg
-             shadow-indigo-500/50 hover:bg-indigo-700
-              text-white font-bold py-2 px-4 rounded-lg"
-            type="submit"
-          >
-            Submit
-          </button>
-        </div>
+    <div className="px-6 max-w-2xl m-auto">
+      <Form method="post" className="flex flex-col gap-4">
+        <h1 className="font-bold text-4xl py-4 text-violet-700">
+          Edit your profile
+        </h1>
+        <InputField
+          htmlFor="username"
+          type="text"
+          name="username"
+          required
+          minLength={5}
+          maxLength={12}
+        >
+          Username
+        </InputField>
+        <TextareaField
+          htmlFor="bio"
+          minLength={50}
+          maxLength={300}
+          name="bio"
+        >
+          Bio
+        </TextareaField>
+        <Button
+          className="border-2 border-violet-700"
+          type="submit"
+        >
+          Submit
+        </Button>
       </Form>
     </div>
   );

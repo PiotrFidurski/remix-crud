@@ -1,7 +1,10 @@
 import clsx from 'clsx';
 import { IconProps } from './types';
 
-export function ArrowLeftIcon({ className }: IconProps) {
+export function ArrowLeftIcon({
+  className,
+  ...props
+}: IconProps) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -9,6 +12,7 @@ export function ArrowLeftIcon({ className }: IconProps) {
       fill="none"
       viewBox="0 0 24 24"
       stroke="currentColor"
+      {...props}
     >
       <path
         strokeLinecap="round"

@@ -1,11 +1,13 @@
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
-import { Button, DropdownItem } from '../Elements';
 import {
+  Button,
+  DropdownItem,
+} from '~/components/Elements';
+import {
+  ArrowRightIcon,
+  DeleteIcon,
   DotsHorizontalIcon,
-  LogoutIcon,
-  ProfileIcon,
-  SettingsIcon,
-} from '../Icons';
+} from '~/components/Icons';
 
 export default function Dropdown() {
   return (
@@ -22,29 +24,20 @@ export default function Dropdown() {
         <DropdownMenu.Label className="text-slate-700 text-xs px-2">
           <span>Options</span>
         </DropdownMenu.Label>
-        <DropdownItem>
-          <div className="py-1 px-2 min-w-200 w-full flex justify-between items-center text-sm">
-            <span>Profile</span>
-            <ProfileIcon
-              aria-hidden="true"
-              className="w-5 h-5"
-            />
-          </div>
-        </DropdownItem>
-        <DropdownItem>
-          <div className="py-1 px-2 min-w-200 w-full flex justify-between items-center text-sm">
-            <span>Settings</span>
-            <SettingsIcon
-              aria-hidden="true"
-              className="w-5 h-5"
-            />
-          </div>
-        </DropdownItem>
         <DropdownMenu.Separator className="bg-white w-full h-px my-2 bg-white-10" />
+        <DropdownItem>
+          <div className="px-2 py-1 min-w-200 w-full flex justify-between items-center text-sm">
+            <span>Read more</span>
+            <ArrowRightIcon
+              aria-hidden="true"
+              className="w-5 h-5"
+            />
+          </div>
+        </DropdownItem>
         <DropdownItem className="hover:bg-error focus:bg-error">
           <div className="px-2 py-1 min-w-200 w-full flex justify-between items-center text-sm">
-            <span>Logout</span>
-            <LogoutIcon
+            <span>Delete</span>
+            <DeleteIcon
               aria-hidden="true"
               className="w-5 h-5"
             />

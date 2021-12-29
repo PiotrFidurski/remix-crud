@@ -23,7 +23,7 @@ export function Sidebar() {
       <div className="fixed top-0 left-0 right-0 bg-black-default flex lg:hidden border-b lg:border-b-0 border-white-10 text-gray-300 justify-between items-center py-2 px-4">
         <div className="flex items-center">
           <Button
-            className="flex mr-2"
+            className="flex mr-2 border-transparent"
             aria-controls="menu"
             aria-label={
               expanded ? 'close menu' : 'open menu'
@@ -34,7 +34,7 @@ export function Sidebar() {
             <img
               className="w-10 h-10 object-cover rounded-full"
               alt="user-avatar"
-              src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=80&q=100"
+              src="/images/avatar.png"
             />
           </Button>
           <span className="text-gray-300">Chimson</span>
@@ -46,11 +46,12 @@ export function Sidebar() {
         className={
           expanded
             ? 'translate-y-0 visible ease-in-out duration-200 bg-black-default min-h-auto max-w-full max-h-screen rounded-none lg:rounded-lg w-full fixed top-0 left-0 right-0 lg:relative px-4 py-8'
-            : 'translate-y-minus100 ease-in-out duration-200 lg:translate-y-0 lg:visible invisible bg-black-default min-h-auto max-w-full max-h-screen rounded-lg w-full px-4 py-8 fixed top-0 left-0 right-0 lg:relative'
+            : 'translate-y-minus100 min-h-600 ease-in-out duration-200 lg:translate-y-0 lg:visible invisible bg-black-default min-h-auto max-w-full max-h-screen rounded-lg w-full px-4 py-8 fixed top-0 left-0 right-0 lg:relative'
         }
       >
         <div className="lg:hidden flex rounded-t-lg text-gray-300 absolute top-0 border-b border-white-10 left-0 right-0 py-2 px-4">
           <Button
+            className="border-transparent"
             onClick={handleToggleMenu}
             aria-controls="menu"
             aria-label={
@@ -65,31 +66,31 @@ export function Sidebar() {
           <ListItem>
             <Link to=".">
               <HomeIcon aria-hidden="true" />
-              <span className="mt-tiny">Home</span>
+              <span className="mt-px">Home</span>
             </Link>
           </ListItem>
           <ListItem>
             <Link to="chimson">
               <ProfileIcon aria-hidden="true" />
-              <span className="mt-tiny">Profile</span>
+              <span className="mt-px">Profile</span>
             </Link>
           </ListItem>
           <ListItem>
-            <Link to="new">
+            <Link to="posts/new">
               <PlusIcon aria-hidden="true" />
-              <span className="mt-tiny">New Post</span>
+              <span className="mt-px">New Post</span>
             </Link>
           </ListItem>
           <ListItem>
             <Link to="somwhere">
               <SettingsIcon aria-hidden="true" />
-              <span className="mt-tiny">Display</span>
+              <span className="mt-px">Display</span>
             </Link>
           </ListItem>
           <ListItem className="lg:hidden block">
             <Link to="settings">
               <SettingsIcon aria-hidden="true" />
-              <span className="mt-tiny">Settings</span>
+              <span className="mt-px">Settings</span>
             </Link>
           </ListItem>
           <ListItem className="lg:hidden block hover:bg-error">
@@ -99,7 +100,7 @@ export function Sidebar() {
               activeClass="bg-error"
             >
               <LogoutIcon aria-hidden="true" />
-              <span className="mt-tiny">Logout</span>
+              <span className="mt-px">Logout</span>
             </Link>
           </ListItem>
         </ul>
@@ -109,10 +110,10 @@ export function Sidebar() {
               <img
                 className="w-10 h-10 object-cover rounded-full"
                 alt="user-avatar"
-                src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=80&q=100"
+                src="/images/avatar.png"
               />
             </div>
-            <span className="text-gray-300">Chimson</span>
+            <span>Chimson</span>
           </div>
           <Dropdown />
         </div>
