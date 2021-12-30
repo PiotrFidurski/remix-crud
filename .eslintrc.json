@@ -25,6 +25,7 @@
     "import/no-unresolved": "error",
     "@typescript-eslint/indent": "off",
     "react/prop-types": "off",
+    "react/require-default-props": "off",
     "arrow-body-style": "off",
     "import/prefer-default-export": "off",
     "comma-dangle": "off",

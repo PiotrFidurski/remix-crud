@@ -6,16 +6,22 @@ import {
 
 type InputFieldProps =
   React.InputHTMLAttributes<HTMLInputElement> &
-    FieldWrapperPassThroughProps;
+    FieldWrapperPassThroughProps & {
+      errorMessage?: string;
+    };
 
 export function InputField({
   className,
   htmlFor,
   children,
+  errorMessage,
   ...props
 }: InputFieldProps) {
   return (
-    <FieldWrapper htmlFor={htmlFor}>
+    <FieldWrapper
+      htmlFor={htmlFor}
+      errorMessage={errorMessage}
+    >
       <span className="mb-2">{children}</span>
       <input
         id={htmlFor}
