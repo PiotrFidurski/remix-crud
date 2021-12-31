@@ -10,7 +10,7 @@ import { Button } from '~/components/Elements';
 import { InputField } from '~/components/Form';
 import {
   createUserSession,
-  login,
+  register,
 } from '~/features/auth/api/session.server';
 import { schema } from '~/features/auth/utils/schema';
 import { db } from '~/utils/db.server';
@@ -42,24 +42,21 @@ export const action: ActionFunction = async ({
       where: { username: username.toLowerCase() },
     });
 
-    if (!existingUser) {
+    if (existingUser) {
       return badRequest({
         fieldErrors: {
-          username: `User with username ${username} doesn't exists.`,
+          username: `User with username ${username} already exists.`,
           password: '',
         },
       });
     }
 
-    const user = await login({ username, password });
+    const user = await register({ username, password });
 
     if (!user) {
       return badRequest({
-        fieldErrors: {
-          password: '',
-          username:
-            'Username or password is wrong please try again',
-        },
+        formError:
+          'Something went wrong trying to create new user.',
       });
     }
 
@@ -79,7 +76,7 @@ export const action: ActionFunction = async ({
   }
 };
 
-export default function LoginRoute() {
+export default function RegisterRoute() {
   const actionData = useActionData<ActionData>();
   const [searchParams] = useSearchParams();
 
@@ -102,7 +99,7 @@ export default function LoginRoute() {
           }
         />
         <h1 className="font-bold text-4xl py-4 text-violet-700">
-          Login
+          Register
         </h1>
         <InputField
           errorMessage={actionData?.fieldErrors?.username}
@@ -111,14 +108,6 @@ export default function LoginRoute() {
           htmlFor="username"
           minLength={5}
           required
-          aria-invalid={Boolean(
-            actionData?.fieldErrors?.username
-          )}
-          aria-describedby={
-            actionData?.fieldErrors?.password
-              ? 'username-error'
-              : undefined
-          }
         >
           Username
         </InputField>
@@ -129,19 +118,11 @@ export default function LoginRoute() {
           htmlFor="password"
           minLength={8}
           required
-          aria-invalid={Boolean(
-            actionData?.fieldErrors?.password
-          )}
-          aria-describedby={
-            actionData?.fieldErrors?.password
-              ? 'password-error'
-              : undefined
-          }
         >
           Password
         </InputField>
         <Button type="submit" className="border-violet-700">
-          Login
+          Register
         </Button>
         {actionData?.formError}
       </Form>

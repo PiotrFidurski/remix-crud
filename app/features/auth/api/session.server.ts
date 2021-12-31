@@ -52,7 +52,7 @@ if (!sessionSecret) {
   );
 }
 
-const storage = createCookieSessionStorage({
+export const storage = createCookieSessionStorage({
   cookie: {
     name: 'AUTH_session',
     secrets: [sessionSecret],
@@ -66,20 +66,24 @@ const storage = createCookieSessionStorage({
 
 type CreateUserSession = {
   userId: string;
-  path: string;
+  redirectTo: string;
 };
 
 export async function createUserSession({
   userId,
-  path,
+  redirectTo,
 }: CreateUserSession) {
   const session = await storage.getSession();
 
   session.set('userId', userId);
 
-  return redirect(path, {
+  return redirect(redirectTo, {
     headers: {
       'Set-Cookie': await storage.commitSession(session),
     },
   });
+}
+
+export function getUserSession(request: Request) {
+  return storage.getSession(request.headers.get('Cookie'));
 }
