@@ -9,11 +9,14 @@ import {
   DotsHorizontalIcon,
 } from '~/components/Icons';
 
-export default function Dropdown() {
+export function PostDropdown() {
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>
-        <Button className="border-transparent">
+        <Button
+          className="border-transparent"
+          aria-label="open menu"
+        >
           <DotsHorizontalIcon />
         </Button>
       </DropdownMenu.Trigger>

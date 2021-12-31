@@ -3,7 +3,7 @@ import clsx from 'clsx';
 type FieldWrapperProps =
   React.LabelHTMLAttributes<HTMLLabelElement> & {
     children: React.ReactNode;
-  };
+  } & { errorMessage?: string };
 
 export type FieldWrapperPassThroughProps = Omit<
   FieldWrapperProps,
@@ -14,6 +14,7 @@ export function FieldWrapper({
   children,
   htmlFor,
   className,
+  errorMessage,
   ...props
 }: FieldWrapperProps) {
   return (
@@ -23,6 +24,9 @@ export function FieldWrapper({
       {...props}
     >
       {children}
+      <span className="text-error mt-2">
+        {errorMessage}
+      </span>
     </label>
   );
 }

@@ -53,7 +53,7 @@ export default function UsernameRoute() {
                   isActive &&
                   location.pathname ===
                     `/${params.username}`
-                    ? 'text-violet-700 px-2 py-2 w-full'
+                    ? 'text-violet-500 px-2 py-2 w-full'
                     : 'text-gray-300 px-2 py-2 w-full'
                 }
               >
@@ -71,7 +71,7 @@ export default function UsernameRoute() {
               <span
                 className={
                   isActive
-                    ? 'text-violet-700 px-2 py-2 w-full'
+                    ? 'text-violet-500 px-2 py-2 w-full'
                     : 'text-gray-300 px-2 py-2 w-full'
                 }
               >

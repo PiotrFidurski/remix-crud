@@ -2,6 +2,10 @@
   "files.eol": "\n",
   "editor.bracketPairColorization.enabled": true,
   "editor.guides.bracketPairs": true,
+  "[prisma]": {
+    "editor.defaultFormatter": "Prisma.prisma",
+    "editor.wordWrapColumn": 80
+  },
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode"
 }

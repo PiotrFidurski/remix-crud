@@ -1,16 +1,27 @@
-import { ActionFunction, Form, redirect } from 'remix';
+import {
+  ActionFunction,
+  Form,
+  LoaderFunction,
+} from 'remix';
 import { Button } from '~/components/Elements';
 import {
   InputField,
   TextareaField,
 } from '~/components/Form';
+import { requireUserId } from '~/features/auth/utils/getUser';
+
+export const loader: LoaderFunction = async ({
+  request,
+}) => {
+  await requireUserId(request);
+  return null;
+};
 
 export const action: ActionFunction = async ({
   request,
 }) => {
-  await request.formData();
-
-  return redirect('/posts/new');
+  await requireUserId(request);
+  return null;
 };
 
 export default function NewPostRoute() {

@@ -70,7 +70,7 @@ export function Sidebar() {
             </Link>
           </ListItem>
           <ListItem>
-            <Link to="chimson">
+            <Link to="chimson" prefetch="intent">
               <ProfileIcon aria-hidden="true" />
               <span className="mt-px">Profile</span>
             </Link>

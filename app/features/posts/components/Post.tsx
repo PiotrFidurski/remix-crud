@@ -1,6 +1,6 @@
 import { formatDistanceToNow } from 'date-fns';
 import { Link } from 'remix';
-import Dropdown from './Dropdown';
+import { PostDropdown } from './PostDropDown';
 
 export type PostProps = {
   post: {
@@ -12,6 +12,13 @@ export type PostProps = {
 };
 
 export function Post({ post }: PostProps) {
+  const date = formatDistanceToNow(
+    new Date(post.createdAt),
+    {
+      addSuffix: true,
+    }
+  );
+
   return (
     <article
       key={post.id}
@@ -19,17 +26,15 @@ export function Post({ post }: PostProps) {
     >
       <div className="flex items-center justify-between border-b border-white-10 px-4">
         <div className="flex items-center py-4 min-w-0">
-          <Link to="chimson" className="text-gray-300">
+          <Link to="/chimson" className="text-gray-300">
             Chimson
           </Link>
           <span className="px-2 text-slate-600">·</span>
           <p className="text-gray-300 mt-px truncate text-ellipsis overflow-hidden">
-            {formatDistanceToNow(new Date(post.createdAt), {
-              addSuffix: true,
-            })}
+            {date}
           </p>
         </div>
-        <Dropdown />
+        <PostDropdown />
       </div>
       <div className="flex gap-2">
         <img
