@@ -3,17 +3,18 @@ import {
   Item,
 } from '@radix-ui/react-dropdown-menu';
 import clsx from 'clsx';
+import * as React from 'react';
 
 type ItemProps = DropdownMenuItemProps &
   React.RefAttributes<HTMLDivElement>;
 
-export function DropdownItem({
-  children,
-  className,
-  ...props
-}: ItemProps) {
+export const DropdownItem = React.forwardRef<
+  HTMLDivElement,
+  ItemProps
+>(({ children, className, ...props }, ref) => {
   return (
     <Item
+      ref={ref}
       className={clsx(
         'hover:cursor-pointer hover:bg-violet-700 focus:outline-none focus:bg-violet-700 rounded-md text-gray-300',
         className
@@ -23,4 +24,4 @@ export function DropdownItem({
       {children}
     </Item>
   );
-}
+});
