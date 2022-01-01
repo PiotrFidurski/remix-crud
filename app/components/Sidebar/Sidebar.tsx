@@ -154,7 +154,7 @@ export function Sidebar({ user }: SidebarProps) {
                   src="/images/avatar.png"
                 />
               </div>
-              <span>Chimson</span>
+              <span>{user.username}</span>
             </div>
             <Form method="post" action="/logout">
               <button

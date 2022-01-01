@@ -1,3 +1,4 @@
+import { User } from '@prisma/client';
 import { formatDistanceToNow } from 'date-fns';
 import { Link } from 'remix';
 import { PostDropdown } from './PostDropDown';
@@ -9,6 +10,7 @@ export type PostProps = {
     title: string;
     createdAt: Date;
   };
+  user: User;
 };
 
 export function Post({ post }: PostProps) {
