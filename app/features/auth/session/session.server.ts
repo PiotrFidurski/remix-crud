@@ -64,6 +64,18 @@ export const storage = createCookieSessionStorage({
   },
 });
 
+export async function logout(request: Request) {
+  const session = await storage.getSession(
+    request.headers.get('Cookie')
+  );
+
+  return redirect('/login', {
+    headers: {
+      'Set-Cookie': await storage.destroySession(session),
+    },
+  });
+}
+
 type CreateUserSession = {
   userId: string;
   redirectTo: string;
