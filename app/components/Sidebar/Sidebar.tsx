@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Form } from 'remix';
-import { useUser } from '~/features/auth/context/useUser';
+import { useUser } from '~/features/auth';
 import { Button, ListItem } from '../Elements';
 import {
   ArrowLeftIcon,

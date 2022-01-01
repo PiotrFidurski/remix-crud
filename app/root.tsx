@@ -12,7 +12,7 @@ import {
   useLoaderData,
 } from 'remix';
 import { Sidebar } from './components/Sidebar';
-import AuthProvider from './features/auth/context/AuthProvider';
+import { AuthProvider } from './features/auth';
 import { getUser } from './features/auth/utils/getUser';
 import styles from './tailwind.css';
 

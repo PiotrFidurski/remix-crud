@@ -7,7 +7,7 @@ type AuthProviderProps = {
   user: User;
 };
 
-export default function AuthProvider({
+export function AuthProvider({
   children,
   user,
 }: AuthProviderProps) {

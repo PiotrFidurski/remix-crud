@@ -1,7 +1,7 @@
 import { Post, User } from '@prisma/client';
 import { formatDistanceToNow } from 'date-fns';
 import { Link } from 'remix';
-import { useUser } from '~/features/auth/context/useUser';
+import { useUser } from '~/features/auth';
 import { PostDropdown } from './PostDropDown';
 
 export type PostProps = {
