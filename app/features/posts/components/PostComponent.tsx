@@ -1,14 +1,16 @@
 import { Post, User } from '@prisma/client';
 import { formatDistanceToNow } from 'date-fns';
 import { Link } from 'remix';
+import { useUser } from '~/features/auth/context/useUser';
 import { PostDropdown } from './PostDropDown';
 
 export type PostProps = {
   post: Post & { author: User };
-  user: User | null;
 };
 
-export function PostComponent({ post, user }: PostProps) {
+export function PostComponent({ post }: PostProps) {
+  const user = useUser();
+
   const isOwner = post?.authorId === user?.id;
 
   return (

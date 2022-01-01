@@ -65,6 +65,7 @@ export const action: ActionFunction = async ({
 
 export default function NewPostRoute() {
   const actionData = useActionData<ActionData>();
+
   return (
     <div className="bg-black-default p-2 text-gray-300 min-h-screen flex justify-center">
       <Form

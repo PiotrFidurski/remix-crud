@@ -12,6 +12,7 @@ import {
   useLoaderData,
 } from 'remix';
 import { Sidebar } from './components/Sidebar';
+import AuthProvider from './features/auth/context/AuthProvider';
 import { getUser } from './features/auth/utils/getUser';
 import styles from './tailwind.css';
 
@@ -70,16 +71,18 @@ export default function App() {
         <Links />
       </head>
       <body className="bg-gray-dark">
-        <main className="max-w-7xl m-auto w-100 text-white">
-          <div className="grid grid-cols-4 gap-2 sm:p-10 p-0">
-            <div className="lg:col-span-1 col-span-4 h-20">
-              <Sidebar user={user!} />
+        <AuthProvider user={user!}>
+          <main className="max-w-7xl m-auto w-100 text-white">
+            <div className="grid grid-cols-4 gap-2 sm:p-10 p-0">
+              <div className="lg:col-span-1 col-span-4 h-20">
+                <Sidebar />
+              </div>
+              <div className="col-span-4 lg:col-span-3">
+                <Outlet />
+              </div>
             </div>
-            <div className="col-span-4 lg:col-span-3">
-              <Outlet />
-            </div>
-          </div>
-        </main>
+          </main>
+        </AuthProvider>
         <ScrollRestoration />
         <Scripts />
         {process.env.NODE_ENV === 'development' && (
