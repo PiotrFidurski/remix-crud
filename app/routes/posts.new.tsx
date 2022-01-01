@@ -1,7 +1,6 @@
 import {
   ActionFunction,
   Form,
-  json,
   LoaderFunction,
   redirect,
   useActionData,
@@ -14,6 +13,7 @@ import {
 } from '~/components/Form';
 import { requireUserId } from '~/features/auth/utils/getUser';
 import { createPostSchema } from '~/features/posts/utils/schemas';
+import { badRequest } from '~/utils/badRequest';
 import { db } from '~/utils/db.server';
 
 type ActionData = {
@@ -23,9 +23,6 @@ type ActionData = {
     content: string | undefined;
   };
 };
-
-const badRequest = (data: ActionData) =>
-  json(data, { status: 400 });
 
 export const loader: LoaderFunction = async ({
   request,
