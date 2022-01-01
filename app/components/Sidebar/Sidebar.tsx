@@ -104,12 +104,6 @@ export function Sidebar({ user }: SidebarProps) {
               <span className="mt-px">New Post</span>
             </Link>
           </ListItem>
-          <ListItem>
-            <Link to="somwhere">
-              <SettingsIcon aria-hidden="true" />
-              <span className="mt-px">Display</span>
-            </Link>
-          </ListItem>
           {!user ? (
             <ListItem>
               <Link to="login">
