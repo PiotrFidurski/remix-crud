@@ -1,6 +1,6 @@
 import { User } from '@prisma/client';
 import * as React from 'react';
-import { Form, Link as RmxLink } from 'remix';
+import { Form } from 'remix';
 import { Button, ListItem } from '../Elements';
 import {
   ArrowLeftIcon,
@@ -110,6 +110,14 @@ export function Sidebar({ user }: SidebarProps) {
               <span className="mt-px">Display</span>
             </Link>
           </ListItem>
+          {!user ? (
+            <ListItem>
+              <Link to="login">
+                <LogoutIcon aria-hidden="true" />
+                <span className="mt-px">Login</span>
+              </Link>
+            </ListItem>
+          ) : null}
           {user ? (
             <ListItem className="lg:hidden block">
               <Link to="settings">
@@ -158,13 +166,7 @@ export function Sidebar({ user }: SidebarProps) {
               <Dropdown onLogout={handleLogout} />
             </Form>
           </div>
-        ) : (
-          <div className="hidden lg:flex lg:border-t border-b lg:border-b-0 border-white-10 text-gray-300 justify-between items-center rounded-b-lg absolute top-0 lg:bottom-0 lg:top-auto left-0 right-0 py-2 px-4">
-            <Button className="px-6">
-              <RmxLink to="/login">Login</RmxLink>
-            </Button>
-          </div>
-        )}
+        ) : null}
       </nav>
     </>
   );
