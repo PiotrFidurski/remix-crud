@@ -1,9 +1,16 @@
-import { Form } from 'remix';
+import { Form, LoaderFunction } from 'remix';
 import { Button } from '~/components/Elements';
 import {
   InputField,
   TextareaField,
 } from '~/components/Form';
+import { requireUserId } from '~/features/auth';
+
+export const loader: LoaderFunction = async ({
+  request,
+}) => {
+  await requireUserId(request);
+};
 
 export default function UsernameEditRoute() {
   return (
