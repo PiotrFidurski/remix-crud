@@ -3,7 +3,7 @@ import { db } from '~/utils/db.server';
 import {
   getUserSession,
   storage,
-} from '../api/session.server';
+} from '../session/session.server';
 
 export async function getUserId(request: Request) {
   const session = await getUserSession(request);

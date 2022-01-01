@@ -11,7 +11,7 @@ import { InputField } from '~/components/Form';
 import {
   createUserSession,
   register,
-} from '~/features/auth/api/session.server';
+} from '~/features/auth/session/session.server';
 import { schema } from '~/features/auth/utils/schema';
 import { db } from '~/utils/db.server';
 
