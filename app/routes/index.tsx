@@ -1,39 +1,42 @@
+import { Post, User } from '@prisma/client';
 import { LoaderFunction, useLoaderData } from 'remix';
-import { Post } from '~/features/posts/components/Post';
+import { getUser } from '~/features/auth/utils/getUser';
+import { PostComponent } from '~/features/posts/components/PostComponent';
+import { db } from '~/utils/db.server';
 
-export const loader: LoaderFunction = async () => {
-  return [
-    {
-      id: 1,
-      content:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur unde reiciendis culpa facere eaque sint doloremque id sequi ipsum aperiam recusandae magnam quaerat, minus asperiores reprehenderit dolorum itaque. Excepturi, corporis.',
-      title: 'christmas dog',
-      createdAt: Date.now(),
-    },
-    {
-      id: 4,
-      content:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur unde reiciendis culpa facere eaque sint doloremque id sequi ipsum aperiam recusandae magnam quaerat, minus asperiores reprehenderit dolorum itaque. Excepturi, corporis.',
-      title: 'my dog here',
-      createdAt: Date.now(),
-    },
-    {
-      id: 5,
-      content:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur unde reiciendis culpa facere eaque sint doloremque id sequi ipsum aperiam recusandae magnam quaerat, minus asperiores reprehenderit dolorum itaque. Excepturi, corporis. Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur unde reiciendis culpa facere eaque sint doloremque id sequi ipsum aperiam recusandae magnam quaerat, minus asperiores reprehenderit dolorum itaque. Excepturi, corporis. Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur unde reiciendis culpa facere eaque sint doloremque id sequi ipsum aperiam recusandae magnam quaerat, minus asperiores reprehenderit dolorum itaque. Excepturi, corporis. Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur unde reiciendis culpa facere eaque sint doloremque id sequi ipsum aperiam recusandae magnam quaerat, minus asperiores reprehenderit dolorum itaque. Excepturi, corporis',
-      title: 'new post',
-      createdAt: Date.now(),
-    },
-  ];
+type LoaderData = {
+  posts: Array<Post & { author: User }>;
+  user: User | null;
+};
+
+export const loader: LoaderFunction = async ({
+  request,
+}) => {
+  const user = await getUser(request);
+
+  const posts = await db.post.findMany({
+    include: { author: true },
+  });
+
+  const data: LoaderData = {
+    posts,
+    user,
+  };
+
+  return data;
 };
 
 export default function IndexRoute() {
-  const data = useLoaderData();
+  const data = useLoaderData<LoaderData>();
 
   return (
     <div className="flex flex-col gap-4 rounded-md">
-      {data.map((post: any) => (
-        <Post key={post.id} post={post} />
+      {data.posts.map((post) => (
+        <PostComponent
+          key={post.id}
+          post={post}
+          user={data.user}
+        />
       ))}
     </div>
   );

@@ -1,14 +1,18 @@
+import { User } from '@prisma/client';
 import {
   Links,
   LinksFunction,
   LiveReload,
+  LoaderFunction,
   Meta,
   MetaFunction,
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLoaderData,
 } from 'remix';
 import { Sidebar } from './components/Sidebar';
+import { getUser } from './features/auth/utils/getUser';
 import styles from './tailwind.css';
 
 export const meta: MetaFunction = () => {
@@ -35,7 +39,25 @@ export const links: LinksFunction = () => {
   ];
 };
 
+type LoaderData = {
+  user: User | null;
+};
+
+export const loader: LoaderFunction = async ({
+  request,
+}) => {
+  const user = await getUser(request);
+
+  const data: LoaderData = {
+    user,
+  };
+
+  return data;
+};
+
 export default function App() {
+  const { user } = useLoaderData<LoaderData>();
+
   return (
     <html lang="en">
       <head>
@@ -51,7 +73,7 @@ export default function App() {
         <main className="max-w-7xl m-auto w-100 text-white">
           <div className="grid grid-cols-4 gap-2 sm:p-10 p-0">
             <div className="lg:col-span-1 col-span-4 h-20">
-              <Sidebar />
+              <Sidebar user={user!} />
             </div>
             <div className="col-span-4 lg:col-span-3">
               <Outlet />

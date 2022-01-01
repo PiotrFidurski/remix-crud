@@ -1,7 +1,6 @@
 import {
   ActionFunction,
   Form,
-  json,
   useActionData,
   useSearchParams,
 } from 'remix';
@@ -11,20 +10,11 @@ import { InputField } from '~/components/Form';
 import {
   createUserSession,
   register,
-} from '~/features/auth/api/session.server';
-import { schema } from '~/features/auth/utils/schema';
+} from '~/features/auth/session/session.server';
+import { schema } from '~/features/auth/utils/schemas';
+import { LoginActionData } from '~/types';
+import { badRequest } from '~/utils/badRequest';
 import { db } from '~/utils/db.server';
-
-type ActionData = {
-  formError?: string;
-  fieldErrors?: {
-    username: string | undefined;
-    password: string | undefined;
-  };
-};
-
-const badRequest = (data: ActionData) =>
-  json(data, { status: 400 });
 
 export const action: ActionFunction = async ({
   request,
@@ -51,7 +41,10 @@ export const action: ActionFunction = async ({
       });
     }
 
-    const user = await register({ username, password });
+    const user = await register({
+      username: username.toLowerCase(),
+      password,
+    });
 
     if (!user) {
       return badRequest({
@@ -77,7 +70,7 @@ export const action: ActionFunction = async ({
 };
 
 export default function RegisterRoute() {
-  const actionData = useActionData<ActionData>();
+  const actionData = useActionData<LoginActionData>();
   const [searchParams] = useSearchParams();
 
   return (

@@ -7,11 +7,16 @@ import {
   SettingsIcon,
 } from '../Icons';
 
-export default function Dropdown() {
+export default function Dropdown({
+  onLogout,
+}: {
+  onLogout: () => void;
+}) {
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>
         <Button
+          type="button"
           className="border-transparent"
           aria-label="open dropdown"
         >
@@ -44,14 +49,19 @@ export default function Dropdown() {
           </div>
         </DropdownItem>
         <DropdownMenu.Separator className="bg-white w-full h-px my-2 bg-white-10" />
-        <DropdownItem className="hover:bg-error focus:bg-error">
-          <div className="px-2 py-1 min-w-200 w-full flex justify-between items-center text-sm">
-            <span>Logout</span>
-            <LogoutIcon
-              aria-hidden="true"
-              className="w-5 h-5"
-            />
-          </div>
+        <DropdownItem
+          className="hover:bg-error focus:bg-error"
+          asChild
+        >
+          <button onClick={onLogout} type="button">
+            <div className="px-2 py-1 min-w-200 w-full flex justify-between items-center text-sm">
+              <span>Logout</span>
+              <LogoutIcon
+                aria-hidden="true"
+                className="w-5 h-5"
+              />
+            </div>
+          </button>
         </DropdownItem>
         <DropdownMenu.Arrow className="fill-black-default" />
       </DropdownMenu.Content>

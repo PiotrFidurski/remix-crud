@@ -1,16 +1,39 @@
+import { User } from '@prisma/client';
 import { format } from 'date-fns';
 import {
+  LoaderFunction,
   NavLink,
   Outlet,
+  useLoaderData,
   useLocation,
-  useParams,
 } from 'remix';
 import { Button } from '~/components/Elements';
+import { db } from '~/utils/db.server';
+
+type LoaderData = {
+  user: User | null;
+};
+
+export const loader: LoaderFunction = async ({
+  params,
+}) => {
+  const { username } = params;
+
+  const user = await db.user.findFirst({
+    where: { username },
+  });
+
+  const data: LoaderData = {
+    user,
+  };
+
+  return data;
+};
 
 export default function UsernameRoute() {
   const location = useLocation();
 
-  const params = useParams();
+  const { user } = useLoaderData<LoaderData>();
 
   return (
     <div className="bg-black-default py-10 text-gray-300 rounded-md w-full">
@@ -24,11 +47,16 @@ export default function UsernameRoute() {
         </div>
         <div className="flex flex-col">
           <h1 className="font-bold text-4xl py-2">
-            {params.username}
+            {user?.username}
           </h1>
           <div className="flex gap-1 items-center">
             <span>Joined</span>
-            <span>{format(new Date(), 'MMM-dd-yyyy')}</span>
+            <span>
+              {format(
+                new Date(user?.createdAt!),
+                'MMM-dd-yyyy'
+              )}
+            </span>
           </div>
           <hr className="border-white-10 my-4" />
           <p>
@@ -51,8 +79,7 @@ export default function UsernameRoute() {
               <span
                 className={
                   isActive &&
-                  location.pathname ===
-                    `/${params.username}`
+                  location.pathname === `/${user?.username}`
                     ? 'text-violet-500 px-2 py-2 w-full'
                     : 'text-gray-300 px-2 py-2 w-full'
                 }

@@ -1,23 +1,15 @@
+import { Post, User } from '@prisma/client';
 import { formatDistanceToNow } from 'date-fns';
 import { Link } from 'remix';
 import { PostDropdown } from './PostDropDown';
 
 export type PostProps = {
-  post: {
-    id: number;
-    content: string;
-    title: string;
-    createdAt: Date;
-  };
+  post: Post & { author: User };
+  user: User | null;
 };
 
-export function Post({ post }: PostProps) {
-  const date = formatDistanceToNow(
-    new Date(post.createdAt),
-    {
-      addSuffix: true,
-    }
-  );
+export function PostComponent({ post, user }: PostProps) {
+  const isOwner = post?.authorId === user?.id;
 
   return (
     <article
@@ -26,15 +18,20 @@ export function Post({ post }: PostProps) {
     >
       <div className="flex items-center justify-between border-b border-white-10 px-4">
         <div className="flex items-center py-4 min-w-0">
-          <Link to="/chimson" className="text-gray-300">
-            Chimson
+          <Link
+            to={`/${post.author.username}`}
+            className="text-gray-300"
+          >
+            {post.author.username}
           </Link>
           <span className="px-2 text-slate-600">·</span>
           <p className="text-gray-300 mt-px truncate text-ellipsis overflow-hidden">
-            {date}
+            {formatDistanceToNow(new Date(post.createdAt), {
+              addSuffix: true,
+            })}
           </p>
         </div>
-        <PostDropdown />
+        <PostDropdown canDelete={isOwner} />
       </div>
       <div className="flex gap-2">
         <img

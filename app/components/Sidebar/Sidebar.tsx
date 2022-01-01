@@ -1,4 +1,6 @@
+import { User } from '@prisma/client';
 import * as React from 'react';
+import { Form } from 'remix';
 import { Button, ListItem } from '../Elements';
 import {
   ArrowLeftIcon,
@@ -11,33 +13,52 @@ import {
 import Dropdown from './Dropdown';
 import { Link } from './Link';
 
-export function Sidebar() {
+type SidebarProps = {
+  user: User;
+};
+
+export function Sidebar({ user }: SidebarProps) {
   const [expanded, setExpanded] = React.useState(false);
+
+  const submitBtnRef =
+    React.useRef<HTMLButtonElement | null>(null);
 
   const handleToggleMenu = () => {
     setExpanded(!expanded);
+  };
+
+  const handleLogout = () => {
+    submitBtnRef.current?.click();
   };
 
   return (
     <>
       <div className="fixed top-0 left-0 right-0 bg-black-default flex lg:hidden border-b lg:border-b-0 border-white-10 text-gray-300 justify-between items-center py-2 px-4">
         <div className="flex items-center">
-          <Button
-            className="flex mr-2 border-transparent"
-            aria-controls="menu"
-            aria-label={
-              expanded ? 'close menu' : 'open menu'
-            }
-            aria-expanded={expanded}
-            onClick={handleToggleMenu}
-          >
-            <img
-              className="w-10 h-10 object-cover rounded-full"
-              alt="user-avatar"
-              src="/images/avatar.png"
-            />
-          </Button>
-          <span className="text-gray-300">Chimson</span>
+          {user ? (
+            <>
+              <Button
+                className="flex mr-2 border-transparent"
+                aria-controls="menu"
+                aria-label={
+                  expanded ? 'close menu' : 'open menu'
+                }
+                aria-expanded={expanded}
+                onClick={handleToggleMenu}
+              >
+                <img
+                  className="w-10 h-10 object-cover rounded-full"
+                  alt="user-avatar"
+                  src="/images/avatar.png"
+                />
+              </Button>
+              <span className="text-gray-300">Chimson</span>
+            </>
+          ) : (
+            <Button onClick={handleToggleMenu}>
+              <ArrowLeftIcon />
+            </Button>
+          )}
         </div>
       </div>
       <nav
@@ -69,54 +90,77 @@ export function Sidebar() {
               <span className="mt-px">Home</span>
             </Link>
           </ListItem>
-          <ListItem>
-            <Link to="chimson" prefetch="intent">
-              <ProfileIcon aria-hidden="true" />
-              <span className="mt-px">Profile</span>
-            </Link>
-          </ListItem>
+          {user ? (
+            <ListItem>
+              <Link to="chimson" prefetch="intent">
+                <ProfileIcon aria-hidden="true" />
+                <span className="mt-px">Profile</span>
+              </Link>
+            </ListItem>
+          ) : null}
           <ListItem>
             <Link to="posts/new">
               <PlusIcon aria-hidden="true" />
               <span className="mt-px">New Post</span>
             </Link>
           </ListItem>
-          <ListItem>
-            <Link to="somwhere">
-              <SettingsIcon aria-hidden="true" />
-              <span className="mt-px">Display</span>
-            </Link>
-          </ListItem>
-          <ListItem className="lg:hidden block">
-            <Link to="settings">
-              <SettingsIcon aria-hidden="true" />
-              <span className="mt-px">Settings</span>
-            </Link>
-          </ListItem>
-          <ListItem className="lg:hidden block hover:bg-error">
-            <Link
-              to="nowhere"
-              className="focus-visible:border-error"
-              activeClass="bg-error"
-            >
-              <LogoutIcon aria-hidden="true" />
-              <span className="mt-px">Logout</span>
-            </Link>
-          </ListItem>
+          {!user ? (
+            <ListItem>
+              <Link to="login">
+                <LogoutIcon aria-hidden="true" />
+                <span className="mt-px">Login</span>
+              </Link>
+            </ListItem>
+          ) : null}
+          {user ? (
+            <ListItem className="lg:hidden block">
+              <Link to="settings">
+                <SettingsIcon aria-hidden="true" />
+                <span className="mt-px">Settings</span>
+              </Link>
+            </ListItem>
+          ) : null}
+          {user ? (
+            <ListItem className="lg:hidden block hover:bg-error">
+              <Form
+                action="/logout"
+                method="post"
+                className="flex border-2 border-transparent focus-visible:border-2 focus-visible:border-violet-700 focus-visible:outline-none rounded-md"
+              >
+                <button
+                  type="submit"
+                  className="flex justify-start gap-2 px-2 py-2 w-full text-gray-300 rounded-md"
+                >
+                  <LogoutIcon aria-hidden="true" />
+                  <span className="mt-px">Logout</span>
+                </button>
+              </Form>
+            </ListItem>
+          ) : null}
         </ul>
-        <div className="hidden lg:flex lg:border-t border-b lg:border-b-0 border-white-10 text-gray-300 justify-between items-center rounded-b-lg absolute top-0 lg:bottom-0 lg:top-auto left-0 right-0 py-2 px-4">
-          <div className="flex items-center">
-            <div className="flex mr-2">
-              <img
-                className="w-10 h-10 object-cover rounded-full"
-                alt="user-avatar"
-                src="/images/avatar.png"
-              />
+        {user ? (
+          <div className="hidden lg:flex lg:border-t border-b lg:border-b-0 border-white-10 text-gray-300 justify-between items-center rounded-b-lg absolute top-0 lg:bottom-0 lg:top-auto left-0 right-0 py-2 px-4">
+            <div className="flex items-center">
+              <div className="flex mr-2">
+                <img
+                  className="w-10 h-10 object-cover rounded-full"
+                  alt="user-avatar"
+                  src="/images/avatar.png"
+                />
+              </div>
+              <span>{user.username}</span>
             </div>
-            <span>Chimson</span>
+            <Form method="post" action="/logout">
+              <button
+                ref={submitBtnRef}
+                type="submit"
+                aria-label="logout"
+                hidden
+              />
+              <Dropdown onLogout={handleLogout} />
+            </Form>
           </div>
-          <Dropdown />
-        </div>
+        ) : null}
       </nav>
     </>
   );

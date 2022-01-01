@@ -2,8 +2,8 @@ import { redirect } from 'remix';
 import { db } from '~/utils/db.server';
 import {
   getUserSession,
-  storage,
-} from '../api/session.server';
+  logout,
+} from '../session/session.server';
 
 export async function getUserId(request: Request) {
   const session = await getUserSession(request);
@@ -28,18 +28,6 @@ export async function requireUserId(
     throw redirect(`/login?${searchParams}`);
   }
   return userId;
-}
-
-export async function logout(request: Request) {
-  const session = await storage.getSession(
-    request.headers.get('Cookie')
-  );
-
-  return redirect('/login', {
-    headers: {
-      'Set-Cookie': await storage.destroySession(session),
-    },
-  });
 }
 
 export async function getUser(request: Request) {
