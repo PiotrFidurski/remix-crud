@@ -10,6 +10,7 @@ export const loader: LoaderFunction = async ({
   request,
 }) => {
   await requireUserId(request);
+  return null;
 };
 
 export default function UsernameEditRoute() {
