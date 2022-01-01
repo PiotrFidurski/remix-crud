@@ -12,7 +12,7 @@ import {
   createUserSession,
   register,
 } from '~/features/auth/session/session.server';
-import { schema } from '~/features/auth/utils/schema';
+import { schema } from '~/features/auth/utils/schemas';
 import { db } from '~/utils/db.server';
 
 type ActionData = {

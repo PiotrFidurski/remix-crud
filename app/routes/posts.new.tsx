@@ -13,15 +13,8 @@ import {
   TextareaField,
 } from '~/components/Form';
 import { requireUserId } from '~/features/auth/utils/getUser';
-import { schema } from '~/features/posts/utils/createPostSchema';
+import { createPostSchema } from '~/features/posts/utils/schemas';
 import { db } from '~/utils/db.server';
-
-export const loader: LoaderFunction = async ({
-  request,
-}) => {
-  await requireUserId(request);
-  return null;
-};
 
 type ActionData = {
   formError?: string;
@@ -34,6 +27,13 @@ type ActionData = {
 const badRequest = (data: ActionData) =>
   json(data, { status: 400 });
 
+export const loader: LoaderFunction = async ({
+  request,
+}) => {
+  await requireUserId(request);
+  return null;
+};
+
 export const action: ActionFunction = async ({
   request,
 }) => {
@@ -43,7 +43,7 @@ export const action: ActionFunction = async ({
   try {
     const userId = await requireUserId(request);
 
-    schema.parse({ title, content });
+    createPostSchema.parse({ title, content });
 
     const post = await db.post.create({
       data: {

@@ -1,4 +1,3 @@
-import { Post, User } from '@prisma/client';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import {
   Button,
@@ -11,13 +10,11 @@ import {
 } from '~/components/Icons';
 
 type PostDropdownProps = {
-  user: User;
-  post: Post;
+  canDelete: boolean;
 };
 
 export function PostDropdown({
-  user,
-  post,
+  canDelete,
 }: PostDropdownProps) {
   return (
     <DropdownMenu.Root>
@@ -46,7 +43,18 @@ export function PostDropdown({
             />
           </div>
         </DropdownItem>
-        {post.authorId === user.id ? (
+        {canDelete ? (
+          <DropdownItem>
+            <div className="px-2 py-1 min-w-200 w-full flex justify-between items-center text-sm">
+              <span>Edit</span>
+              <ArrowRightIcon
+                aria-hidden="true"
+                className="w-5 h-5"
+              />
+            </div>
+          </DropdownItem>
+        ) : null}
+        {canDelete ? (
           <DropdownItem className="hover:bg-error focus:bg-error">
             <div className="px-2 py-1 min-w-200 w-full flex justify-between items-center text-sm">
               <span>Delete</span>

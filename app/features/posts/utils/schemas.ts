@@ -1,6 +1,6 @@
 import * as z from 'zod';
 
-export const schema = z.object({
+export const createPostSchema = z.object({
   title: z
     .string({ invalid_type_error: 'title is required.' })
     .min(5, 'title should be at least 5 characters.')
