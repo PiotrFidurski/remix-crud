@@ -4,7 +4,7 @@ import { Link } from 'remix';
 import { PostDropdown } from './PostDropDown';
 
 export type PostProps = {
-  post: PostType;
+  post: PostType & { author: User };
   user: User;
 };
 
@@ -24,7 +24,7 @@ export function Post({ post, user }: PostProps) {
       <div className="flex items-center justify-between border-b border-white-10 px-4">
         <div className="flex items-center py-4 min-w-0">
           <Link to="/chimson" className="text-gray-300">
-            Chimson
+            {post.author.username}
           </Link>
           <span className="px-2 text-slate-600">·</span>
           <p className="text-gray-300 mt-px truncate text-ellipsis overflow-hidden">
