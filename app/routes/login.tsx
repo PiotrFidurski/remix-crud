@@ -29,7 +29,7 @@ export const action: ActionFunction = async ({
     schema.parse({ username, password });
 
     const existingUser = await db.user.findFirst({
-      where: { username: username.toLowerCase() },
+      where: { username },
     });
 
     if (!existingUser) {
@@ -71,6 +71,7 @@ export const action: ActionFunction = async ({
 
 export default function LoginRoute() {
   const actionData = useActionData<LoginActionData>();
+
   const [searchParams] = useSearchParams();
 
   return (

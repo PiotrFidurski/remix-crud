@@ -1,3 +1,4 @@
+import { User } from '@prisma/client';
 import {
   Links,
   LinksFunction,
@@ -38,16 +39,24 @@ export const links: LinksFunction = () => {
   ];
 };
 
+type LoaderData = {
+  user: User | null;
+};
+
 export const loader: LoaderFunction = async ({
   request,
 }) => {
   const user = await getUser(request);
 
-  return user;
+  const data: LoaderData = {
+    user,
+  };
+
+  return data;
 };
 
 export default function App() {
-  const user = useLoaderData();
+  const { user } = useLoaderData<LoaderData>();
 
   return (
     <html lang="en">
@@ -64,7 +73,7 @@ export default function App() {
         <main className="max-w-7xl m-auto w-100 text-white">
           <div className="grid grid-cols-4 gap-2 sm:p-10 p-0">
             <div className="lg:col-span-1 col-span-4 h-20">
-              <Sidebar user={user} />
+              <Sidebar user={user!} />
             </div>
             <div className="col-span-4 lg:col-span-3">
               <Outlet />
