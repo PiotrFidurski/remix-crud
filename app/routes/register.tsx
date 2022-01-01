@@ -10,7 +10,7 @@ import { InputField } from '~/components/Form';
 import {
   createUserSession,
   register,
-} from '~/features/auth/session/session.server';
+} from '~/features/auth';
 import { schema } from '~/features/auth/utils/schemas';
 import { LoginActionData } from '~/types';
 import { badRequest } from '~/utils/badRequest';
@@ -71,6 +71,7 @@ export const action: ActionFunction = async ({
 
 export default function RegisterRoute() {
   const actionData = useActionData<LoginActionData>();
+
   const [searchParams] = useSearchParams();
 
   return (

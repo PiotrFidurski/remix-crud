@@ -11,7 +11,7 @@ import {
   InputField,
   TextareaField,
 } from '~/components/Form';
-import { requireUserId } from '~/features/auth/utils/getUser';
+import { requireUserId } from '~/features/auth';
 import { createPostSchema } from '~/features/posts/utils/schemas';
 import { badRequest } from '~/utils/badRequest';
 import { db } from '~/utils/db.server';

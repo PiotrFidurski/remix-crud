@@ -92,7 +92,7 @@ export function Sidebar() {
           </ListItem>
           {user ? (
             <ListItem>
-              <Link to="chimson" prefetch="intent">
+              <Link to={user.username} prefetch="intent">
                 <ProfileIcon aria-hidden="true" />
                 <span className="mt-px">Profile</span>
               </Link>

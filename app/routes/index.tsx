@@ -1,6 +1,6 @@
 import { Post, User } from '@prisma/client';
 import { LoaderFunction, useLoaderData } from 'remix';
-import { PostComponent } from '~/features/posts/components/PostComponent';
+import { PostComponent } from '~/features/posts';
 import { db } from '~/utils/db.server';
 
 type LoaderData = {
