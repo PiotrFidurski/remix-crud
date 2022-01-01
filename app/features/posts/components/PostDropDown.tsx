@@ -1,3 +1,4 @@
+import { Post, User } from '@prisma/client';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import {
   Button,
@@ -9,7 +10,15 @@ import {
   DotsHorizontalIcon,
 } from '~/components/Icons';
 
-export function PostDropdown() {
+type PostDropdownProps = {
+  user: User;
+  post: Post;
+};
+
+export function PostDropdown({
+  user,
+  post,
+}: PostDropdownProps) {
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>
@@ -37,15 +46,17 @@ export function PostDropdown() {
             />
           </div>
         </DropdownItem>
-        <DropdownItem className="hover:bg-error focus:bg-error">
-          <div className="px-2 py-1 min-w-200 w-full flex justify-between items-center text-sm">
-            <span>Delete</span>
-            <DeleteIcon
-              aria-hidden="true"
-              className="w-5 h-5"
-            />
-          </div>
-        </DropdownItem>
+        {post.authorId === user.id ? (
+          <DropdownItem className="hover:bg-error focus:bg-error">
+            <div className="px-2 py-1 min-w-200 w-full flex justify-between items-center text-sm">
+              <span>Delete</span>
+              <DeleteIcon
+                aria-hidden="true"
+                className="w-5 h-5"
+              />
+            </div>
+          </DropdownItem>
+        ) : null}
         <DropdownMenu.Arrow className="fill-black-default" />
       </DropdownMenu.Content>
     </DropdownMenu.Root>
