@@ -6,17 +6,23 @@ import {
 
 type TextareaFieldProps =
   React.TextareaHTMLAttributes<HTMLTextAreaElement> &
-    FieldWrapperPassThroughProps;
+    FieldWrapperPassThroughProps & {
+      errorMessage?: string;
+    };
 
 export function TextareaField({
   className,
   htmlFor,
   children,
   rows = 10,
+  errorMessage,
   ...props
 }: TextareaFieldProps) {
   return (
-    <FieldWrapper htmlFor={htmlFor}>
+    <FieldWrapper
+      htmlFor={htmlFor}
+      errorMessage={errorMessage}
+    >
       <span className="mb-2">{children}</span>
       <textarea
         id={htmlFor}
