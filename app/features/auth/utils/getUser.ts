@@ -1,9 +1,6 @@
 import { redirect } from 'remix';
 import { db } from '~/utils/db.server';
-import {
-  getUserSession,
-  logout,
-} from '../session/session.server';
+import { getUserSession, logout } from '../session';
 
 export async function getUserId(request: Request) {
   const session = await getUserSession(request);
@@ -24,6 +21,7 @@ export async function requireUserId(
     const searchParams = new URLSearchParams([
       ['redirectTo', redirectTo],
     ]);
+
     // eslint-disable-next-line @typescript-eslint/no-throw-literal
     throw redirect(`/login?${searchParams}`);
   }
