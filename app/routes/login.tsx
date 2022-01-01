@@ -115,7 +115,7 @@ export default function LoginRoute() {
             actionData?.fieldErrors?.username
           )}
           aria-describedby={
-            actionData?.fieldErrors?.password
+            actionData?.fieldErrors?.username
               ? 'username-error'
               : undefined
           }
