@@ -19,7 +19,7 @@ export function PostComponent({ post, user }: PostProps) {
       <div className="flex items-center justify-between border-b border-white-10 px-4">
         <div className="flex items-center py-4 min-w-0">
           <Link
-            to={post.author.username}
+            to={`/${post.author.username}`}
             className="text-gray-300"
           >
             {post.author.username}

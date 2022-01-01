@@ -41,7 +41,10 @@ export const action: ActionFunction = async ({
       });
     }
 
-    const user = await register({ username, password });
+    const user = await register({
+      username: username.toLowerCase(),
+      password,
+    });
 
     if (!user) {
       return badRequest({
