@@ -10,8 +10,8 @@ import { InputField } from '~/components/Form';
 import {
   createUserSession,
   login,
-} from '~/features/auth/session/session.server';
-import { schema } from '~/features/auth/utils/schemas';
+  schema,
+} from '~/features/auth';
 import { LoginActionData } from '~/types';
 import { badRequest } from '~/utils/badRequest';
 import { db } from '~/utils/db.server';

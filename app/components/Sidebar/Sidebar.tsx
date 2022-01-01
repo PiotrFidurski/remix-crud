@@ -1,6 +1,6 @@
-import { User } from '@prisma/client';
 import * as React from 'react';
 import { Form } from 'remix';
+import { useUser } from '~/features/auth';
 import { Button, ListItem } from '../Elements';
 import {
   ArrowLeftIcon,
@@ -13,12 +13,10 @@ import {
 import Dropdown from './Dropdown';
 import { Link } from './Link';
 
-type SidebarProps = {
-  user: User;
-};
-
-export function Sidebar({ user }: SidebarProps) {
+export function Sidebar() {
   const [expanded, setExpanded] = React.useState(false);
+
+  const user = useUser();
 
   const submitBtnRef =
     React.useRef<HTMLButtonElement | null>(null);
@@ -52,7 +50,9 @@ export function Sidebar({ user }: SidebarProps) {
                   src="/images/avatar.png"
                 />
               </Button>
-              <span className="text-gray-300">Chimson</span>
+              <span className="text-gray-300">
+                {user.username}
+              </span>
             </>
           ) : (
             <Button onClick={handleToggleMenu}>
@@ -92,7 +92,7 @@ export function Sidebar({ user }: SidebarProps) {
           </ListItem>
           {user ? (
             <ListItem>
-              <Link to="chimson" prefetch="intent">
+              <Link to={user.username} prefetch="intent">
                 <ProfileIcon aria-hidden="true" />
                 <span className="mt-px">Profile</span>
               </Link>

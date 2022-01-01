@@ -11,7 +11,7 @@ import {
   InputField,
   TextareaField,
 } from '~/components/Form';
-import { requireUserId } from '~/features/auth/utils/getUser';
+import { requireUserId } from '~/features/auth';
 import { createPostSchema } from '~/features/posts/utils/schemas';
 import { badRequest } from '~/utils/badRequest';
 import { db } from '~/utils/db.server';
@@ -65,6 +65,7 @@ export const action: ActionFunction = async ({
 
 export default function NewPostRoute() {
   const actionData = useActionData<ActionData>();
+
   return (
     <div className="bg-black-default p-2 text-gray-300 min-h-screen flex justify-center">
       <Form
