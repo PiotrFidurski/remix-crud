@@ -1,48 +1,7 @@
-import bcrypt from 'bcrypt';
 import {
   createCookieSessionStorage,
   redirect,
 } from 'remix';
-import { db } from '~/utils/db.server';
-
-export type LoginProps = {
-  username: string;
-  password: string;
-};
-
-export async function register({
-  username,
-  password,
-}: LoginProps) {
-  const passwordHash = await bcrypt.hash(password, 10);
-
-  return db.user.create({
-    data: {
-      username,
-      password: passwordHash,
-    },
-  });
-}
-
-export async function login({
-  username,
-  password,
-}: LoginProps) {
-  const user = await db.user.findFirst({
-    where: { username },
-  });
-
-  if (!user) return null;
-
-  const isCorrectPassword = await bcrypt.compare(
-    password,
-    user.password
-  );
-
-  if (!isCorrectPassword) return null;
-
-  return user;
-}
 
 const sessionSecret = process.env.SESSION_SECRET;
 
@@ -63,18 +22,6 @@ export const storage = createCookieSessionStorage({
     maxAge: 60 * 60 * 24 * 30,
   },
 });
-
-export async function logout(request: Request) {
-  const session = await storage.getSession(
-    request.headers.get('Cookie')
-  );
-
-  return redirect('/login', {
-    headers: {
-      'Set-Cookie': await storage.destroySession(session),
-    },
-  });
-}
 
 type CreateUserSession = {
   userId: string;
