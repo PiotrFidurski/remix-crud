@@ -1,19 +1,14 @@
-import { User } from '@prisma/client';
+import { Post as PostType, User } from '@prisma/client';
 import { formatDistanceToNow } from 'date-fns';
 import { Link } from 'remix';
 import { PostDropdown } from './PostDropDown';
 
 export type PostProps = {
-  post: {
-    id: number;
-    content: string;
-    title: string;
-    createdAt: Date;
-  };
+  post: PostType;
   user: User;
 };
 
-export function Post({ post }: PostProps) {
+export function Post({ post, user }: PostProps) {
   const date = formatDistanceToNow(
     new Date(post.createdAt),
     {
@@ -36,7 +31,7 @@ export function Post({ post }: PostProps) {
             {date}
           </p>
         </div>
-        <PostDropdown />
+        <PostDropdown user={user} post={post} />
       </div>
       <div className="flex gap-2">
         <img
