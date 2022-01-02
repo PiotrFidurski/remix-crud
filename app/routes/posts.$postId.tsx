@@ -1,5 +1,7 @@
 import { Post, User } from '@prisma/client';
-import { LoaderFunction, useLoaderData } from 'remix';
+import { json, LoaderFunction, useLoaderData } from 'remix';
+import { SadEmojiIcon } from '~/components/Icons';
+import { DisplayResponse } from '~/components/Responses';
 import { PostComponent } from '~/features/posts';
 import { db } from '~/utils/db.server';
 
@@ -17,6 +19,15 @@ export const loader: LoaderFunction = async ({
     include: { author: true },
   });
 
+  if (!post) {
+    throw json(
+      "There used to be something here, but it doesn't exist anymore.",
+      {
+        status: 404,
+      }
+    );
+  }
+
   const data: LoaderData = {
     post,
   };
@@ -31,5 +42,13 @@ export default function PostRoute() {
     <div className="flex flex-col gap-4 w-full bg-black-default rounded-md px-4 py-8">
       <PostComponent post={post!} />
     </div>
+  );
+}
+
+export function CatchBoundary() {
+  return (
+    <DisplayResponse
+      icon={<SadEmojiIcon className="w-16 h-16" />}
+    />
   );
 }

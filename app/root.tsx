@@ -15,6 +15,7 @@ import {
   useLoaderData,
   useTransition,
 } from 'remix';
+import { SadEmojiIcon } from './components/Icons';
 import { Sidebar } from './components/Sidebar';
 import { AuthProvider } from './features/auth';
 import { getUser } from './features/auth/utils/getUser';
@@ -104,5 +105,22 @@ export default function App() {
         )}
       </body>
     </html>
+  );
+}
+
+export function ErrorBoundary({ error }: { error: Error }) {
+  return (
+    <div className="flex flex-col justify-center min-h-screen max-w-lg m-auto gap-4 w-full bg-black-default rounded-md px-4 py-8">
+      <div className="flex flex-col items-center text-red-400">
+        <SadEmojiIcon className="w-16 h-16" />
+        <h1>something went very wrong</h1>
+      </div>
+      <details>
+        <summary>Error details</summary>
+        <code className="text-red-400">
+          {JSON.stringify(error.stack, null, 2)}
+        </code>
+      </details>
+    </div>
   );
 }
