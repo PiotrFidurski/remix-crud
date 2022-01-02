@@ -22,7 +22,6 @@ export async function requireUserId(
       ['redirectTo', redirectTo],
     ]);
 
-    // eslint-disable-next-line @typescript-eslint/no-throw-literal
     throw redirect(`/login?${searchParams}`);
   }
   return userId;
@@ -39,7 +38,6 @@ export async function getUser(request: Request) {
     });
     return user;
   } catch {
-    // eslint-disable-next-line @typescript-eslint/no-throw-literal
     throw logout(request);
   }
 }
