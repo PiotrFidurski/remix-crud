@@ -1,6 +1,7 @@
 import { User } from '@prisma/client';
 import { format } from 'date-fns';
 import {
+  json,
   LoaderFunction,
   NavLink,
   Outlet,
@@ -8,6 +9,8 @@ import {
   useLocation,
 } from 'remix';
 import { Button } from '~/components/Elements';
+import { SadEmojiIcon } from '~/components/Icons';
+import { DisplayResponse } from '~/components/Responses';
 import { db } from '~/utils/db.server';
 
 type LoaderData = {
@@ -22,6 +25,13 @@ export const loader: LoaderFunction = async ({
   const user = await db.user.findFirst({
     where: { username },
   });
+
+  if (!user) {
+    throw json(
+      `User with username ${username} doesn't exist`,
+      { status: 404 }
+    );
+  }
 
   const data: LoaderData = {
     user,
@@ -110,5 +120,13 @@ export default function UsernameRoute() {
       </div>
       <Outlet />
     </div>
+  );
+}
+
+export function CatchBoundary() {
+  return (
+    <DisplayResponse
+      icon={<SadEmojiIcon className="w-16 h-16" />}
+    />
   );
 }

@@ -1,19 +1,19 @@
-import { ThrownResponse } from 'remix';
+import { useCatch } from 'remix';
 import { ErrorResponse } from './ErrorResponse';
 import { OkResponse } from './OkResponse';
 
 type DisplayErrorProps =
   React.HTMLAttributes<HTMLDivElement> & {
-    caught: ThrownResponse<number, string>;
     icon: React.ReactNode;
     children?: React.ReactNode;
   };
 
 export function DisplayResponse({
-  caught,
   icon,
   children,
 }: DisplayErrorProps) {
+  const caught = useCatch();
+
   switch (caught.status) {
     case 200: {
       return (
@@ -21,6 +21,10 @@ export function DisplayResponse({
       );
     }
     case 404: {
+      return <ErrorResponse icon={icon} />;
+    }
+
+    case 500: {
       return <ErrorResponse icon={icon} />;
     }
 
