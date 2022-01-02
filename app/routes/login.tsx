@@ -3,6 +3,7 @@ import {
   Form,
   useActionData,
   useSearchParams,
+  useTransition,
 } from 'remix';
 import { ZodError } from 'zod';
 import { Button } from '~/components/Elements';
@@ -72,6 +73,8 @@ export const action: ActionFunction = async ({
 export default function LoginRoute() {
   const actionData = useActionData<LoginActionData>();
 
+  const transition = useTransition();
+
   const [searchParams] = useSearchParams();
 
   return (
@@ -132,7 +135,9 @@ export default function LoginRoute() {
           Password
         </InputField>
         <Button type="submit" className="border-violet-700">
-          Login
+          {transition.submission
+            ? 'logging in...'
+            : 'Login'}
         </Button>
         {actionData?.formError}
       </Form>
