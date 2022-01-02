@@ -70,13 +70,13 @@ export default function NewPostRoute() {
 
   const user = useUser();
 
-  const transition = useTransition();
+  const { submission } = useTransition();
 
-  if (transition.submission) {
-    const title = transition.submission.formData.get(
+  if (submission) {
+    const title = submission.formData.get(
       'title'
     ) as string;
-    const content = transition.submission.formData.get(
+    const content = submission.formData.get(
       'content'
     ) as string;
 
