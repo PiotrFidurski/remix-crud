@@ -1,6 +1,7 @@
 import {
   ActionFunction,
   Form,
+  Link,
   useActionData,
   useSearchParams,
   useTransition,
@@ -124,6 +125,17 @@ export default function RegisterRoute() {
             : 'Register'}
         </Button>
         {actionData?.formError}
+        <div className="flex justify-center">
+          <h2 className="py-2 text-xl ">
+            Already have an account? login{' '}
+            <Link
+              to="/login"
+              className="underline text-violet-600 underline-offset-1"
+            >
+              here
+            </Link>
+          </h2>
+        </div>
       </Form>
     </div>
   );
