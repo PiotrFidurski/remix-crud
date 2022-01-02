@@ -4,6 +4,7 @@ import {
   LoaderFunction,
   redirect,
   useActionData,
+  useTransition,
 } from 'remix';
 import { ZodError } from 'zod';
 import { Button } from '~/components/Elements';
@@ -11,7 +12,8 @@ import {
   InputField,
   TextareaField,
 } from '~/components/Form';
-import { requireUserId } from '~/features/auth';
+import { requireUserId, useUser } from '~/features/auth';
+import { PostComponent } from '~/features/posts';
 import { createPostSchema } from '~/features/posts/utils/schemas';
 import { badRequest } from '~/utils/badRequest';
 import { db } from '~/utils/db.server';
@@ -65,6 +67,37 @@ export const action: ActionFunction = async ({
 
 export default function NewPostRoute() {
   const actionData = useActionData<ActionData>();
+
+  const user = useUser();
+
+  const transition = useTransition();
+
+  if (transition.submission) {
+    const title = transition.submission.formData.get(
+      'title'
+    ) as string;
+    const content = transition.submission.formData.get(
+      'content'
+    ) as string;
+
+    if (createPostSchema.parse({ title, content })) {
+      const post = {
+        id: '',
+        content,
+        title,
+        author: user,
+        authorId: user.id,
+        createdAt: new Date(Date.now()),
+        updatedAt: new Date(Date.now()),
+      };
+
+      return (
+        <div className="flex flex-col gap-4 w-full bg-black-default rounded-md px-4 py-8">
+          <PostComponent post={post} />
+        </div>
+      );
+    }
+  }
 
   return (
     <div className="bg-black-default p-2 text-gray-300 min-h-screen flex justify-center">
