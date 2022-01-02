@@ -11,3 +11,7 @@
         format('woff');
   }
 }
+
+#nprogress .bar {
+  background: #7c3aed !important;
+}

@@ -1,4 +1,7 @@
 import { User } from '@prisma/client';
+import nProgress from 'nprogress';
+import nProgressStyles from 'nprogress/nprogress.css';
+import * as React from 'react';
 import {
   Links,
   LinksFunction,
@@ -10,11 +13,14 @@ import {
   Scripts,
   ScrollRestoration,
   useLoaderData,
+  useTransition,
 } from 'remix';
 import { Sidebar } from './components/Sidebar';
 import { AuthProvider } from './features/auth';
 import { getUser } from './features/auth/utils/getUser';
 import styles from './tailwind.css';
+
+nProgress.configure({ showSpinner: false });
 
 export const meta: MetaFunction = () => {
   return { title: 'New Remix App' };
@@ -23,6 +29,7 @@ export const meta: MetaFunction = () => {
 export const links: LinksFunction = () => {
   return [
     { rel: 'stylesheet', href: styles },
+    { rel: 'stylesheet', href: nProgressStyles },
     {
       rel: 'preload',
       as: 'font',
@@ -58,6 +65,13 @@ export const loader: LoaderFunction = async ({
 
 export default function App() {
   const { user } = useLoaderData<LoaderData>();
+
+  const transition = useTransition();
+
+  React.useEffect(() => {
+    if (transition.state === 'idle') nProgress.done();
+    else nProgress.start();
+  }, [transition.state]);
 
   return (
     <html lang="en">
