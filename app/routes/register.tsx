@@ -1,8 +1,10 @@
 import {
   ActionFunction,
   Form,
+  Link,
   useActionData,
   useSearchParams,
+  useTransition,
 } from 'remix';
 import { ZodError } from 'zod';
 import { Button } from '~/components/Elements';
@@ -72,6 +74,8 @@ export const action: ActionFunction = async ({
 export default function RegisterRoute() {
   const actionData = useActionData<LoginActionData>();
 
+  const transition = useTransition();
+
   const [searchParams] = useSearchParams();
 
   return (
@@ -116,9 +120,22 @@ export default function RegisterRoute() {
           Password
         </InputField>
         <Button type="submit" className="border-violet-700">
-          Register
+          {transition.submission
+            ? 'logging in...'
+            : 'Register'}
         </Button>
         {actionData?.formError}
+        <div className="flex justify-center">
+          <h2 className="py-2 text-xl ">
+            Already have an account? login{' '}
+            <Link
+              to="/login"
+              className="underline text-violet-600 underline-offset-1"
+            >
+              here
+            </Link>
+          </h2>
+        </div>
       </Form>
     </div>
   );

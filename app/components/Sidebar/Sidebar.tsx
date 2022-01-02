@@ -85,7 +85,7 @@ export function Sidebar() {
         </div>
         <ul className="flex flex-col gap-2 mb-0 mt-12 lg:mt-0 lg:mb-12 w-full">
           <ListItem>
-            <Link to=".">
+            <Link to="." prefetch="intent">
               <HomeIcon aria-hidden="true" />
               <span className="mt-px">Home</span>
             </Link>
@@ -99,7 +99,7 @@ export function Sidebar() {
             </ListItem>
           ) : null}
           <ListItem>
-            <Link to="posts/new">
+            <Link to="posts/new" prefetch="intent">
               <PlusIcon aria-hidden="true" />
               <span className="mt-px">New Post</span>
             </Link>

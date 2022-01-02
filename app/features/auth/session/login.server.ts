@@ -1,8 +1,7 @@
 import bcrypt from 'bcrypt';
 import { redirect } from 'remix';
 import { db } from '~/utils/db.server';
-import { getUserSession } from '..';
-import { storage } from './session.server';
+import { getUserSession, storage } from './session.server';
 
 export type LoginProps = {
   username: string;

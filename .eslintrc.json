@@ -23,6 +23,7 @@
   "plugins": ["react", "@typescript-eslint", "import"],
   "rules": {
     "import/no-unresolved": "error",
+    "@typescript-eslint/no-throw-literal": "off",
     "@typescript-eslint/indent": "off",
     "react/prop-types": "off",
     "react/require-default-props": "off",
