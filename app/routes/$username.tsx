@@ -71,7 +71,7 @@ export default function UsernameRoute() {
             </span>
           </div>
           <hr className="border-white-10 my-4" />
-          <p>{user?.bio}</p>
+          <p className="break-all">{user?.bio}</p>
         </div>
       </div>
       <div className="w-full flex justify-between gap-1 pb-2 px-4 border-b border-white-10">
