@@ -72,31 +72,29 @@ export default function NewPostRoute() {
 
   const { submission } = useTransition();
 
-  if (submission) {
-    const title = submission.formData.get(
+  if (!actionData?.fieldErrors && submission) {
+    const title = submission?.formData.get(
       'title'
     ) as string;
-    const content = submission.formData.get(
+    const content = submission?.formData.get(
       'content'
     ) as string;
 
-    if (createPostSchema.parse({ title, content })) {
-      const post = {
-        id: '',
-        content,
-        title,
-        author: user,
-        authorId: user.id,
-        createdAt: new Date(Date.now()),
-        updatedAt: new Date(Date.now()),
-      };
+    const post = {
+      id: '',
+      content,
+      title,
+      author: user,
+      authorId: user.id,
+      createdAt: new Date(Date.now()),
+      updatedAt: new Date(Date.now()),
+    };
 
-      return (
-        <div className="flex flex-col gap-4 w-full bg-black-default rounded-md px-4 py-8">
-          <PostComponent post={post} />
-        </div>
-      );
-    }
+    return (
+      <div className="flex flex-col gap-4 w-full bg-black-default rounded-md px-4 py-8">
+        <PostComponent post={post} />
+      </div>
+    );
   }
 
   return (
@@ -119,7 +117,7 @@ export default function NewPostRoute() {
           type="text"
           name="title"
           required
-          minLength={5}
+          // minLength={5}
           maxLength={30}
           aria-invalid={Boolean(
             actionData?.fieldErrors?.title
