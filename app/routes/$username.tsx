@@ -94,7 +94,7 @@ export default function UsernameRoute() {
             )}
           </NavLink>
         </Button>
-        {authUser.id === user?.id ? (
+        {authUser?.id === user?.id ? (
           <Button
             className="flex-1 rounded-none px-0 py-0 border-2 border-violet-700"
             tabIndex={-1}
