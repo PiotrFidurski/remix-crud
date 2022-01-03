@@ -1,10 +1,6 @@
 import { Post, User } from '@prisma/client';
-import { json, LoaderFunction, useLoaderData } from 'remix';
-import {
-  HappyEmojiIcon,
-  SadEmojiIcon,
-} from '~/components/Icons';
-import { DisplayResponse } from '~/components/Responses';
+import { LoaderFunction, useLoaderData } from 'remix';
+import { SadEmojiIcon } from '~/components/Icons';
 import { PostComponent } from '~/features/posts';
 import { db } from '~/utils/db.server';
 
@@ -24,12 +20,6 @@ export const loader: LoaderFunction = async ({
     },
   });
 
-  if (!posts.length) {
-    throw json('This user has no posts yet.', {
-      status: 200,
-    });
-  }
-
   const data: LoaderData = {
     posts,
   };
@@ -41,10 +31,16 @@ export default function UsernameIndexRoute() {
   const data = useLoaderData<LoaderData>();
 
   return (
-    <div className="flex flex-col gap-2 px-2 py-2">
-      {data.posts.map((post) => (
-        <PostComponent key={post.id} post={post} />
-      ))}
+    <div className="flex flex-col items-center gap-2 px-2 py-2">
+      {!data.posts.length ? (
+        <h1 className="py-2 text-3xl">
+          This user has no posts.
+        </h1>
+      ) : (
+        data.posts.map((post) => (
+          <PostComponent key={post.id} post={post} />
+        ))
+      )}
     </div>
   );
 }
@@ -63,13 +59,5 @@ export function ErrorBoundary({ error }: { error: Error }) {
         </code>
       </details>
     </div>
-  );
-}
-
-export function CatchBoundary() {
-  return (
-    <DisplayResponse
-      icon={<HappyEmojiIcon className="w-16 h-16" />}
-    />
   );
 }
