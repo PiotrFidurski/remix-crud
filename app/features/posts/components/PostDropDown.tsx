@@ -37,18 +37,22 @@ export function PostDropdown({
           <span>Options</span>
         </DropdownMenu.Label>
         <DropdownMenu.Separator className="bg-white w-full h-px my-2 bg-white-10" />
-        <DropdownItem>
-          <div className="px-2 py-1 min-w-200 w-full flex justify-between items-center text-sm">
+        <Link
+          to={`/posts/${postId}`}
+          className="min-w-200 w-full items-center text-sm"
+        >
+          <DropdownItem className="flex justify-between px-2 py-1">
             <span>Read more</span>
             <ArrowRightIcon
               aria-hidden="true"
               className="w-5 h-5"
             />
-          </div>
-        </DropdownItem>
+          </DropdownItem>
+        </Link>
+
         {canModify ? (
           <Link
-            to={`posts/${postId}/edit`}
+            to={`/posts/${postId}/edit`}
             className="min-w-200 w-full items-center text-sm"
           >
             <DropdownItem className="flex justify-between px-2 py-1">
