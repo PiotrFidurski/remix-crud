@@ -20,6 +20,12 @@ export const action: ActionFunction = async ({
   });
 
   if (post?.authorId !== userId) {
+    throw json('Cant find this post anymore.', {
+      status: 404,
+    });
+  }
+
+  if (post?.authorId !== userId) {
     throw json('You cannot perform this action.', {
       status: 401,
     });

@@ -73,6 +73,12 @@ export const action: ActionFunction = async ({
       where: { id: postId },
     });
 
+    if (!post) {
+      throw json('Cant find this post anymore', {
+        status: 404,
+      });
+    }
+
     if (post?.authorId !== userId) {
       throw json('You are not the owner of the post', {
         status: 401,
