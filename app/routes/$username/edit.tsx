@@ -83,6 +83,18 @@ export const action: ActionFunction = async ({
 
     schema.parse({ username: formUsername, bio });
 
+    const existingUser = await db.user.findFirst({
+      where: { username: formUsername },
+    });
+
+    if (existingUser) {
+      return badRequest({
+        fieldErrors: {
+          username: `username ${formUsername} is already taken.`,
+        },
+      });
+    }
+
     await db.user.update({
       where: { id: user.id },
       data: { username: formUsername, bio },
