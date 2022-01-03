@@ -24,9 +24,17 @@ export default function IndexRoute() {
 
   return (
     <div className="flex flex-col gap-4 rounded-md">
-      {data.posts.map((post) => (
-        <PostComponent key={post.id} post={post} />
-      ))}
+      {!data.posts.length ? (
+        <div className="flex justify-center text-gray-300 min-h-screen bg-black-default px-2 py-5">
+          <h1 className="text-3xl">
+            There are no posts yet.
+          </h1>
+        </div>
+      ) : (
+        data.posts.map((post) => (
+          <PostComponent key={post.id} post={post} />
+        ))
+      )}
     </div>
   );
 }
