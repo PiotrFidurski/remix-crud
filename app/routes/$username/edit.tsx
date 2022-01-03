@@ -7,6 +7,7 @@ import {
   redirect,
   useActionData,
   useLoaderData,
+  useTransition,
 } from 'remix';
 import * as z from 'zod';
 import { ZodError } from 'zod';
@@ -128,6 +129,8 @@ export default function UsernameEditRoute() {
 
   const actionData = useActionData<ActionData>();
 
+  const { submission } = useTransition();
+
   return (
     <div className="px-6 max-w-2xl m-auto">
       <Form method="post" className="flex flex-col gap-4">
@@ -176,7 +179,7 @@ export default function UsernameEditRoute() {
           className="border-2 border-violet-700"
           type="submit"
         >
-          Update
+          {submission ? 'Updating...' : 'Update'}
         </Button>
       </Form>
     </div>
