@@ -34,7 +34,7 @@ export function PostComponent({ post }: PostProps) {
           </p>
         </div>
         <PostDropdown
-          canDelete={isOwner}
+          canModify={isOwner}
           postId={post.id}
         />
       </div>
