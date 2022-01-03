@@ -110,17 +110,37 @@ export default function App() {
 
 export function ErrorBoundary({ error }: { error: Error }) {
   return (
-    <div className="flex flex-col justify-center min-h-screen max-w-lg m-auto gap-4 w-full bg-black-default rounded-md px-4 py-8">
-      <div className="flex flex-col items-center text-red-400">
-        <SadEmojiIcon className="w-16 h-16" />
-        <h1>something went very wrong</h1>
-      </div>
-      <details>
-        <summary>Error details</summary>
-        <code className="text-red-400">
-          {JSON.stringify(error.stack, null, 2)}
-        </code>
-      </details>
-    </div>
+    <html lang="en">
+      <head>
+        <title>Oh noes!</title>
+        <Meta />
+        <Links />
+      </head>
+      <body>
+        <div className="bg-black-default">
+          <div className="flex max-w-lg text-gray-300 flex-col justify-center min-h-screen m-auto gap-4 w-full rounded-md px-4 py-8">
+            <div className="flex flex-col items-center text-red-400">
+              <SadEmojiIcon className="w-12 h-12" />
+              <h1 className="py-2 text-3xl">
+                something went very wrong
+              </h1>
+            </div>
+            <div>
+              <details>
+                <summary>
+                  <span className="text-gray-300">
+                    Error Details
+                  </span>
+                </summary>
+                <code className="text-red-400">
+                  {JSON.stringify(error.stack, null, 2)}
+                </code>
+              </details>
+            </div>
+          </div>
+        </div>
+        <Scripts />
+      </body>
+    </html>
   );
 }

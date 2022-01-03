@@ -84,8 +84,8 @@ export default function NewPostRoute() {
       id: '',
       content,
       title,
-      author: user,
-      authorId: user.id,
+      author: user!,
+      authorId: user?.id,
       createdAt: new Date(Date.now()),
       updatedAt: new Date(Date.now()),
     };

@@ -26,6 +26,7 @@ model User {
   username  String
   password  String
   Post      Post[]
+  bio       String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

@@ -10,6 +10,7 @@ import {
 } from 'remix';
 import { Button } from '~/components/Elements';
 import { DisplayResponse } from '~/components/Responses';
+import { useUser } from '~/features/auth';
 import { db } from '~/utils/db.server';
 
 type LoaderData = {
@@ -42,6 +43,8 @@ export const loader: LoaderFunction = async ({
 export default function UsernameRoute() {
   const location = useLocation();
 
+  const authUser = useUser();
+
   const { user } = useLoaderData<LoaderData>();
 
   return (
@@ -68,14 +71,7 @@ export default function UsernameRoute() {
             </span>
           </div>
           <hr className="border-white-10 my-4" />
-          <p>
-            Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Recusandae vero alias
-            laudantium nobis, sapiente et, nihil quod fugit
-            voluptatum incidunt temporibus maxime vel
-            ratione, error voluptas sunt. Delectus, quasi
-            dolorem?
-          </p>
+          <p className="break-all">{user?.bio}</p>
         </div>
       </div>
       <div className="w-full flex justify-between gap-1 pb-2 px-4 border-b border-white-10">
@@ -98,24 +94,26 @@ export default function UsernameRoute() {
             )}
           </NavLink>
         </Button>
-        <Button
-          className="flex-1 rounded-none px-0 py-0 border-2 border-violet-700"
-          tabIndex={-1}
-        >
-          <NavLink to="edit" className="w-full flex">
-            {({ isActive }) => (
-              <span
-                className={
-                  isActive
-                    ? 'text-violet-500 px-2 py-2 w-full'
-                    : 'text-gray-300 px-2 py-2 w-full'
-                }
-              >
-                Edit
-              </span>
-            )}
-          </NavLink>
-        </Button>
+        {authUser?.id === user?.id ? (
+          <Button
+            className="flex-1 rounded-none px-0 py-0 border-2 border-violet-700"
+            tabIndex={-1}
+          >
+            <NavLink to="edit" className="w-full flex">
+              {({ isActive }) => (
+                <span
+                  className={
+                    isActive
+                      ? 'text-violet-500 px-2 py-2 w-full'
+                      : 'text-gray-300 px-2 py-2 w-full'
+                  }
+                >
+                  Edit
+                </span>
+              )}
+            </NavLink>
+          </Button>
+        ) : null}
       </div>
       <Outlet />
     </div>
