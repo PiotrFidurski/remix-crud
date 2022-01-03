@@ -57,7 +57,9 @@ export const action: ActionFunction = async ({
   params,
 }) => {
   const form = await request.formData();
-  const formUsername = form.get('username') as string;
+  const formUsername = (
+    form.get('username') as string
+  ).trim();
   const bio = form.get('bio') as string;
 
   const { username } = params;
