@@ -33,7 +33,10 @@ export function PostComponent({ post }: PostProps) {
             })}
           </p>
         </div>
-        <PostDropdown canDelete={isOwner} />
+        <PostDropdown
+          canModify={isOwner}
+          postId={post.id}
+        />
       </div>
       <div className="flex gap-2">
         <img

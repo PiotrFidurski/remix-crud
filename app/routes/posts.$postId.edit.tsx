@@ -1,9 +1,12 @@
+import { Post } from '@prisma/client';
 import {
   ActionFunction,
   Form,
+  json,
   LoaderFunction,
   redirect,
   useActionData,
+  useLoaderData,
   useTransition,
 } from 'remix';
 import { ZodError } from 'zod';
@@ -26,33 +29,68 @@ type ActionData = {
   };
 };
 
+type LoaderData = {
+  post: Post;
+};
+
 export const loader: LoaderFunction = async ({
   request,
+  params,
 }) => {
-  await requireUserId(request);
-  return null;
+  const { postId } = params;
+
+  const userId = await requireUserId(request);
+
+  const post = await db.post.findFirst({
+    where: { id: postId },
+  });
+
+  if (post?.authorId !== userId) {
+    return redirect('/');
+  }
+
+  const data: LoaderData = {
+    post,
+  };
+
+  return data;
 };
 
 export const action: ActionFunction = async ({
+  params,
   request,
 }) => {
   const form = await request.formData();
   const title = form.get('title') as string;
   const content = form.get('content') as string;
+
   try {
+    const { postId } = params;
+
     const userId = await requireUserId(request);
+
+    const post = await db.post.findFirst({
+      where: { id: postId },
+    });
+
+    if (post?.authorId !== userId) {
+      throw json('You are not the owner of the post', {
+        status: 401,
+      });
+    }
 
     createPostSchema.parse({ title, content });
 
-    const post = await db.post.create({
+    const updatedPost = await db.post.update({
+      where: { id: postId },
       data: {
         title,
         content,
-        authorId: userId,
+        createdAt: new Date(Date.now()),
       },
     });
 
-    return redirect(`/posts/${post.id}`);
+    return redirect(`/posts/${updatedPost.id}`);
   } catch (error) {
     const errors = (error as ZodError).flatten();
 
@@ -65,18 +103,20 @@ export const action: ActionFunction = async ({
   }
 };
 
-export default function NewPostRoute() {
+export default function EditPostRoute() {
   const actionData = useActionData<ActionData>();
+
+  const data = useLoaderData<LoaderData>();
 
   const user = useUser();
 
   const { submission } = useTransition();
 
   if (!actionData?.fieldErrors && submission) {
-    const title = submission?.formData.get(
+    const title = submission.formData.get(
       'title'
     ) as string;
-    const content = submission?.formData.get(
+    const content = submission.formData.get(
       'content'
     ) as string;
 
@@ -109,15 +149,16 @@ export default function NewPostRoute() {
         className="flex px-2 flex-col max-w-2xl w-full m-auto"
       >
         <h1 className="font-bold text-4xl py-4 text-violet-700">
-          Create new post
+          Edit your post
         </h1>
         <InputField
           errorMessage={actionData?.fieldErrors?.title}
           htmlFor="title"
           type="text"
           name="title"
+          defaultValue={data.post.title}
           required
-          // minLength={5}
+          minLength={5}
           maxLength={30}
           aria-invalid={Boolean(
             actionData?.fieldErrors?.title
@@ -134,6 +175,7 @@ export default function NewPostRoute() {
           errorMessage={actionData?.fieldErrors?.content}
           name="content"
           htmlFor="content"
+          defaultValue={data.post.content}
           required
           minLength={50}
           maxLength={300}
@@ -153,7 +195,7 @@ export default function NewPostRoute() {
             type="submit"
             className="border-2 border-violet-700 px-6"
           >
-            Create
+            Edit
           </Button>
         </div>
       </Form>
