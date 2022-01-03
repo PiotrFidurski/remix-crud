@@ -31,11 +31,13 @@ export default function UsernameIndexRoute() {
   const data = useLoaderData<LoaderData>();
 
   return (
-    <div className="flex flex-col items-center gap-2 px-2 py-2">
+    <div className="flex flex-col gap-2 px-2 py-2">
       {!data.posts.length ? (
-        <h1 className="py-2 text-3xl">
-          This user has no posts.
-        </h1>
+        <div className="justify-center flex">
+          <h1 className="py-2 text-3xl">
+            This user has no posts.
+          </h1>
+        </div>
       ) : (
         data.posts.map((post) => (
           <PostComponent key={post.id} post={post} />
