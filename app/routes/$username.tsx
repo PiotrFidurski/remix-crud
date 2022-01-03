@@ -9,7 +9,6 @@ import {
   useLocation,
 } from 'remix';
 import { Button } from '~/components/Elements';
-import { SadEmojiIcon } from '~/components/Icons';
 import { DisplayResponse } from '~/components/Responses';
 import { db } from '~/utils/db.server';
 
@@ -124,9 +123,5 @@ export default function UsernameRoute() {
 }
 
 export function CatchBoundary() {
-  return (
-    <DisplayResponse
-      icon={<SadEmojiIcon className="w-16 h-16" />}
-    />
-  );
+  return <DisplayResponse />;
 }

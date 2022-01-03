@@ -1,6 +1,5 @@
 import { Post, User } from '@prisma/client';
 import { json, LoaderFunction, useLoaderData } from 'remix';
-import { SadEmojiIcon } from '~/components/Icons';
 import { DisplayResponse } from '~/components/Responses';
 import { PostComponent } from '~/features/posts';
 import { db } from '~/utils/db.server';
@@ -46,9 +45,5 @@ export default function PostRoute() {
 }
 
 export function CatchBoundary() {
-  return (
-    <DisplayResponse
-      icon={<SadEmojiIcon className="w-16 h-16" />}
-    />
-  );
+  return <DisplayResponse />;
 }
