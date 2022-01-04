@@ -61,6 +61,7 @@ export const action: ActionFunction = async ({
   request,
 }) => {
   const form = await request.formData();
+
   const title = form.get('title') as string;
   const content = form.get('content') as string;
 

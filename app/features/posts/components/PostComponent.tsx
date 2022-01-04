@@ -60,7 +60,7 @@ export function PostComponent({ post }: PostProps) {
       </div>
       <div className="flex gap-2">
         <img
-          className="object-cover rounded-bl max-w-200 w-full hidden lg:block"
+          className="object-cover rounded-bl max-w-[200px] w-full hidden lg:block"
           alt="husky with a santa hat"
           src="/images/xmasdog.png"
         />

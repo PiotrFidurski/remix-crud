@@ -67,7 +67,7 @@ export function Sidebar() {
         className={
           expanded
             ? 'translate-y-0 visible ease-in-out duration-200 bg-black-default min-h-auto max-w-full max-h-screen rounded-none lg:rounded-lg w-full fixed top-0 left-0 right-0 lg:relative px-4 py-8'
-            : 'translate-y-minus100 min-h-600 ease-in-out duration-200 lg:translate-y-0 lg:visible invisible bg-black-default min-h-auto max-w-full max-h-screen rounded-lg w-full px-4 py-8 fixed top-0 left-0 right-0 lg:relative'
+            : 'translate-y-[-100%] ease-in-out duration-200 lg:translate-y-0 lg:visible invisible bg-black-default min-h-auto max-w-full max-h-screen rounded-lg w-full px-4 py-8 fixed top-0 left-0 right-0 lg:relative'
         }
       >
         <div className="lg:hidden flex rounded-t-lg text-gray-300 absolute top-0 border-b border-white-10 left-0 right-0 py-2 px-4">

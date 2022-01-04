@@ -50,7 +50,7 @@ export default function UsernameRoute() {
   return (
     <div className="bg-black-default py-10 text-gray-300 rounded-md w-full">
       <div className="flex items-start flex-col lg:flex-row gap-4 border-b border-white-10 mb-2 px-4 py-6">
-        <div className="flex min-w-180 border-r border-white-10">
+        <div className="flex min-w-[180px] border-r border-white-10">
           <img
             className="w-40 h-40 object-cover rounded-full border-4 border-violet-700"
             alt="user-avatar"

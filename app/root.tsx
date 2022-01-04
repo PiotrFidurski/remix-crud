@@ -85,7 +85,7 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body className="bg-gray-dark">
+      <body className="bg-gray-background">
         <AuthProvider user={user!}>
           <main className="max-w-7xl m-auto w-100 text-white">
             <div className="grid grid-cols-4 gap-2 sm:p-10 p-0">

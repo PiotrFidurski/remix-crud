@@ -37,8 +37,10 @@ export const action: ActionFunction = async ({
   request,
 }) => {
   const form = await request.formData();
+
   const title = form.get('title') as string;
   const content = form.get('content') as string;
+
   try {
     const userId = await requireUserId(request);
 
@@ -117,7 +119,7 @@ export default function NewPostRoute() {
           type="text"
           name="title"
           required
-          // minLength={5}
+          minLength={5}
           maxLength={30}
           aria-invalid={Boolean(
             actionData?.fieldErrors?.title

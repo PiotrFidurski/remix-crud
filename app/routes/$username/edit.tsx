@@ -9,7 +9,6 @@ import {
   useLoaderData,
   useTransition,
 } from 'remix';
-import * as z from 'zod';
 import { ZodError } from 'zod';
 import { Button } from '~/components/Elements';
 import {
@@ -17,6 +16,7 @@ import {
   TextareaField,
 } from '~/components/Form';
 import { requireUserId } from '~/features/auth';
+import { updateUserSchema } from '~/features/users/utils/schemas';
 import { badRequest } from '~/utils/badRequest';
 import { db } from '~/utils/db.server';
 
@@ -28,26 +28,6 @@ export type ActionData = {
   };
 };
 
-const schema = z.object({
-  username: z
-    .string({ invalid_type_error: 'Username is required.' })
-    .min(
-      5,
-      'Username should be at least 5 characters long.'
-    )
-    .max(
-      25,
-      'Username should be maximum of 25 characters long.'
-    ),
-  bio: z
-    .string()
-    .min(20, 'Bio should be at least 20 characters long.')
-    .max(
-      200,
-      'Bio should be maximum of 25 characters long.'
-    ),
-});
-
 type LoaderData = {
   user: User;
 };
@@ -57,6 +37,7 @@ export const action: ActionFunction = async ({
   params,
 }) => {
   const form = await request.formData();
+
   const formUsername = (
     form.get('username') as string
   ).trim();
@@ -83,7 +64,7 @@ export const action: ActionFunction = async ({
       });
     }
 
-    schema.parse({ username: formUsername, bio });
+    updateUserSchema.parse({ username: formUsername, bio });
 
     const existingUser = await db.user.findFirst({
       where: { username: formUsername },

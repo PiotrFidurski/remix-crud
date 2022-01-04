@@ -6,6 +6,7 @@ export * from './HamburgerIcon';
 export * from './HappyEmojiIcon';
 export * from './HomeIcon';
 export * from './LogoutIcon';
+export * from './PencilIcon';
 export * from './PlusIcon';
 export * from './ProfileIcon';
 export * from './SadEmojiIcon';

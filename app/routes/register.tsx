@@ -13,7 +13,7 @@ import {
   createUserSession,
   register,
 } from '~/features/auth';
-import { schema } from '~/features/auth/utils/schemas';
+import { createUserSchema } from '~/features/users/utils/schemas';
 import { LoginActionData } from '~/types';
 import { badRequest } from '~/utils/badRequest';
 import { db } from '~/utils/db.server';
@@ -22,13 +22,14 @@ export const action: ActionFunction = async ({
   request,
 }) => {
   const form = await request.formData();
+
   const redirectTo =
     (form.get('redirectTo') as string) || '/';
   const username = form.get('username') as string;
   const password = form.get('password') as string;
 
   try {
-    schema.parse({ username, password });
+    createUserSchema.parse({ username, password });
 
     const existingUser = await db.user.findFirst({
       where: { username: username.toLowerCase() },
