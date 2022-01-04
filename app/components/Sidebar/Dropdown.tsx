@@ -1,4 +1,5 @@
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
+import { Form } from 'remix';
 import { Button, DropdownItem } from '../Elements';
 import {
   DotsHorizontalIcon,
@@ -7,11 +8,7 @@ import {
   SettingsIcon,
 } from '../Icons';
 
-export default function Dropdown({
-  onLogout,
-}: {
-  onLogout: () => void;
-}) {
+export default function Dropdown() {
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>
@@ -49,20 +46,26 @@ export default function Dropdown({
           </div>
         </DropdownItem>
         <DropdownMenu.Separator className="bg-white w-full h-px my-2 bg-white-10" />
-        <DropdownItem
-          className="hover:bg-error focus:bg-error"
-          asChild
+        <Form
+          action="/logout"
+          method="post"
+          className="w-full"
         >
-          <button onClick={onLogout} type="button">
-            <div className="px-2 py-1 flex justify-between items-center text-sm">
-              <span>Logout</span>
-              <LogoutIcon
-                aria-hidden="true"
-                className="w-5 h-5"
-              />
-            </div>
+          <button className="w-full" type="submit">
+            <DropdownItem
+              onSelect={(e) => e.preventDefault()}
+              className="hover:bg-error focus:bg-error"
+            >
+              <div className="px-2 py-1 flex justify-between items-center text-sm">
+                <span>Logout</span>
+                <LogoutIcon
+                  aria-hidden="true"
+                  className="w-5 h-5"
+                />
+              </div>
+            </DropdownItem>
           </button>
-        </DropdownItem>
+        </Form>
         <DropdownMenu.Arrow className="fill-black-default" />
       </DropdownMenu.Content>
     </DropdownMenu.Root>

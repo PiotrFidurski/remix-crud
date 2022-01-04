@@ -38,7 +38,7 @@ export default function PostRoute() {
   const { post } = useLoaderData<LoaderData>();
 
   return (
-    <div className="flex flex-col gap-4 w-full bg-black-default rounded-md px-4 py-8">
+    <div className="flex flex-col gap-4 w-full bg-black-default rounded-none lg:rounded-md px-4 py-8">
       <PostComponent post={post!} />
     </div>
   );

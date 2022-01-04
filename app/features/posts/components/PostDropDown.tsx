@@ -1,5 +1,5 @@
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
-import { Link, useLocation } from 'remix';
+import { Form, Link, useLocation } from 'remix';
 import {
   Button,
   DropdownItem,
@@ -14,15 +14,14 @@ import {
 type PostDropdownProps = {
   canModify: boolean;
   postId: string;
-  onDelete: () => void;
 };
 
 export function PostDropdown({
   canModify,
   postId,
-  onDelete,
 }: PostDropdownProps) {
   const location = useLocation();
+
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>
@@ -70,21 +69,26 @@ export function PostDropdown({
         ) : null}
         {canModify &&
         location.pathname === `/posts/${postId}` ? (
-          <button
-            type="button"
-            onClick={onDelete}
+          <Form
             className="w-full"
+            action={`/posts/${postId}/delete`}
+            method="post"
           >
-            <DropdownItem className="hover:bg-error focus:bg-error">
-              <div className="px-2 py-1 w-full flex justify-between items-center text-sm">
-                <span>Delete</span>
-                <DeleteIcon
-                  aria-hidden="true"
-                  className="w-5 h-5"
-                />
-              </div>
-            </DropdownItem>
-          </button>
+            <button type="submit" className="w-full">
+              <DropdownItem
+                onSelect={(e) => e.preventDefault()}
+                className="hover:bg-error focus:bg-error"
+              >
+                <div className="px-2 py-1 w-full flex justify-between items-center text-sm">
+                  <span>Delete</span>
+                  <DeleteIcon
+                    aria-hidden="true"
+                    className="w-5 h-5"
+                  />
+                </div>
+              </DropdownItem>
+            </button>
+          </Form>
         ) : null}
         <DropdownMenu.Arrow className="fill-black-default" />
       </DropdownMenu.Content>
