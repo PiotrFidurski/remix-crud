@@ -26,12 +26,11 @@ export function EditUser() {
       <InputField
         errorMessage={actionData?.fieldErrors?.username}
         htmlFor="username"
-        defaultValue={data.user.username}
         type="text"
         name="username"
         minLength={5}
+        placeholder={data.user.username}
         maxLength={25}
-        required
         aria-invalid={Boolean(
           actionData?.fieldErrors?.username
         )}
@@ -45,7 +44,6 @@ export function EditUser() {
       </InputField>
       <TextareaField
         errorMessage={actionData?.fieldErrors?.bio}
-        defaultValue={data.user.bio!}
         htmlFor="bio"
         name="bio"
         minLength={20}

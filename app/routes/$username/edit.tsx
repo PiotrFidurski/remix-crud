@@ -13,7 +13,7 @@ import { db } from '~/utils/db.server';
 
 const schema = z.object({
   username: z
-    .string({ invalid_type_error: 'Username is required.' })
+    .string()
     .min(
       5,
       'Username should be at least 5 characters long.'
@@ -21,14 +21,16 @@ const schema = z.object({
     .max(
       25,
       'Username should be maximum of 25 characters long.'
-    ),
+    )
+    .optional(),
   bio: z
     .string()
     .min(20, 'Bio should be at least 20 characters long.')
     .max(
       200,
       'Bio should be maximum of 200 characters long.'
-    ),
+    )
+    .optional(),
 });
 
 export const action: ActionFunction = async ({
@@ -38,9 +40,9 @@ export const action: ActionFunction = async ({
   const form = await request.formData();
 
   const formUsername = (
-    form.get('username') as string
-  ).trim();
-  const bio = form.get('bio') as string;
+    form.get('username') as string | undefined
+  )?.trim();
+  const bio = form.get('bio') as string | undefined;
 
   const { username } = params;
 
@@ -63,33 +65,44 @@ export const action: ActionFunction = async ({
       });
     }
 
-    schema.parse({ username: formUsername, bio });
+    const fields = {
+      username: formUsername ?? user.username,
+      bio: bio ?? user.bio,
+    };
 
-    const existingUser = await db.user.findFirst({
-      where: { username: formUsername },
+    schema.parse({
+      ...fields,
     });
 
-    if (existingUser) {
-      return badRequest({
-        fieldErrors: {
-          username: `username ${formUsername} is already taken.`,
-        },
+    if (formUsername) {
+      const existingUser = await db.user.findFirst({
+        where: { username: formUsername },
       });
+
+      if (existingUser) {
+        return badRequest({
+          fieldErrors: {
+            username: `username ${formUsername} is already taken.`,
+          },
+        });
+      }
     }
 
     await db.user.update({
       where: { id: user.id },
-      data: { username: formUsername, bio },
+      data: {
+        ...fields,
+      },
     });
 
-    return redirect(`/${formUsername}`);
+    return redirect(`/${formUsername ?? user.username}`);
   } catch (error) {
     const errors = (error as z.ZodError).flatten();
 
     return badRequest({
       fieldErrors: {
         username: errors.fieldErrors.username?.[0],
-        bio: errors.fieldErrors.username?.[0],
+        bio: errors.fieldErrors.bio?.[0],
       },
     });
   }

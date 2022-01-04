@@ -65,7 +65,7 @@ export function PostComponent({ post }: PostProps) {
           src="/images/xmasdog.png"
         />
         <div className="py-4 px-4 w-auto break-all">
-          <h1 className="text-violet-300 font-bold text-xl pb-2">
+          <h1 className="text-gray-400 font-bold text-xl pb-2">
             <Link to={`/posts/${post.id}`}>
               {post.title}
             </Link>
