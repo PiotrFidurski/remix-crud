@@ -80,7 +80,7 @@ export const action: ActionFunction = async ({
 
 export default function LoginRoute() {
   return (
-    <div className="bg-black-default flex flex-col justify-center rounded-md p-2 text-gray-300">
+    <div className="bg-black-default flex flex-col justify-center rounded-md p-2 px-4 text-gray-300">
       <LoginForm />
       <div className="flex justify-center">
         <h2 className="py-6 text-xl">

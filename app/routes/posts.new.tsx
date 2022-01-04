@@ -95,7 +95,7 @@ export default function NewPostRoute() {
   }
 
   return (
-    <div className="bg-black-default p-2 text-gray-300 min-h-screen flex justify-center">
+    <div className="bg-black-default p-2 px-4 text-gray-300 min-h-screen flex justify-center">
       <CreatePost />
     </div>
   );

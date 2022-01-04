@@ -65,7 +65,7 @@ export const action: ActionFunction = async ({
 
 export default function RegisterRoute() {
   return (
-    <div className="bg-black-default flex text-gray-300 flex-col rounded-md p-2">
+    <div className="bg-black-default flex text-gray-300 flex-col rounded-md p-2 px-4">
       <RegisterForm />
       <div className="flex justify-center">
         <h2 className="py-6 text-xl">

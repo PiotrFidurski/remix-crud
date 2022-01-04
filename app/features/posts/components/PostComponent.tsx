@@ -24,7 +24,7 @@ export function PostComponent({ post }: PostProps) {
   return (
     <article
       key={post.id}
-      className="rounded-md bg-black-default border border-white-10"
+      className="rounded-none lg:rounded-md bg-black-default border border-white-10"
     >
       <div className="flex items-center justify-between border-b border-white-10 px-4">
         <div className="flex items-center py-4 min-w-0">

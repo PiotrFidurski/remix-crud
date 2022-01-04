@@ -83,7 +83,7 @@ export function Sidebar() {
         id="menu"
         className={
           expanded
-            ? 'translate-y-0 min-h-[600px] visible ease-in-out duration-200 bg-black-default min-h-auto max-w-full max-h-screen rounded-none lg:rounded-lg w-full fixed top-0 left-0 right-0 lg:relative px-4 py-8'
+            ? 'translate-y-0 min-h-[600px] visible ease-in-out duration-200 bg-black-default min-h-auto max-w-full max-h-screen rounded-none lg:rounded-lg w-full fixed top-0 left-0 right-0 lg:relative px-4 py-8 drop-shadow-light lg:shadow-none'
             : 'translate-y-[-100%] min-h-[600px] ease-in-out duration-200 lg:translate-y-0 lg:visible invisible bg-black-default min-h-auto max-w-full max-h-screen rounded-lg w-full px-4 py-8 fixed top-0 left-0 right-0 lg:relative'
         }
       >
