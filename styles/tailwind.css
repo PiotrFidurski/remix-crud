@@ -15,3 +15,13 @@
 #nprogress .bar {
   background: #7c3aed !important;
 }
+
+@layer utilities {
+  .button-hover {
+    @apply hover:bg-white-10 border-2 focus-visible:border-2 focus-visible:border-violet-500 focus-visible:outline-none focus-visible:bg-white-10;
+  }
+
+  .focus-ring {
+    @apply focus:outline-none focus:ring focus:ring-violet-700 focus:invalid:ring-error focus:ring-offset-4 focus:border-transparent focus:ring-offset-black-default;
+  }
+}
