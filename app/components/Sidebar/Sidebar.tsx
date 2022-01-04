@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Form } from 'remix';
+import { Form, useTransition } from 'remix';
 import { useUser } from '~/features/auth';
 import { Button, ListItem } from '../Elements';
 import {
@@ -16,6 +16,8 @@ import { Link } from './Link';
 export function Sidebar() {
   const [expanded, setExpanded] = React.useState(false);
 
+  const transition = useTransition();
+
   const user = useUser();
 
   const submitBtnRef =
@@ -28,6 +30,18 @@ export function Sidebar() {
   const handleLogout = () => {
     submitBtnRef.current?.click();
   };
+
+  React.useEffect(() => {
+    /* 
+      Whenever transition.state changes and the menu is already opened, we will
+      close the menu for mobile users to prevent menu hanging around after user
+      performs an action
+    */
+
+    if (transition.state === 'loading' && expanded) {
+      setExpanded(false);
+    }
+  }, [transition.state, expanded]);
 
   return (
     <>
@@ -66,8 +80,8 @@ export function Sidebar() {
         id="menu"
         className={
           expanded
-            ? 'translate-y-0 visible ease-in-out duration-200 bg-black-default min-h-auto max-w-full max-h-screen rounded-none lg:rounded-lg w-full fixed top-0 left-0 right-0 lg:relative px-4 py-8'
-            : 'translate-y-minus100 min-h-600 ease-in-out duration-200 lg:translate-y-0 lg:visible invisible bg-black-default min-h-auto max-w-full max-h-screen rounded-lg w-full px-4 py-8 fixed top-0 left-0 right-0 lg:relative'
+            ? 'translate-y-0 min-h-[600px] visible ease-in-out duration-200 bg-black-default min-h-auto max-w-full max-h-screen rounded-none lg:rounded-lg w-full fixed top-0 left-0 right-0 lg:relative px-4 py-8'
+            : 'translate-y-[-100%] min-h-[600px] ease-in-out duration-200 lg:translate-y-0 lg:visible invisible bg-black-default min-h-auto max-w-full max-h-screen rounded-lg w-full px-4 py-8 fixed top-0 left-0 right-0 lg:relative'
         }
       >
         <div className="lg:hidden flex rounded-t-lg text-gray-300 absolute top-0 border-b border-white-10 left-0 right-0 py-2 px-4">
@@ -140,7 +154,7 @@ export function Sidebar() {
         </ul>
         {user ? (
           <div className="hidden lg:flex lg:border-t border-b lg:border-b-0 border-white-10 text-gray-300 justify-between items-center rounded-b-lg absolute top-0 lg:bottom-0 lg:top-auto left-0 right-0 py-2 px-4">
-            <div className="flex items-center">
+            <div className="flex items-center min-w-0">
               <div className="flex mr-2">
                 <img
                   className="w-10 h-10 object-cover rounded-full"
@@ -148,7 +162,9 @@ export function Sidebar() {
                   src="/images/avatar.png"
                 />
               </div>
-              <span>{user.username}</span>
+              <span className="truncate text-ellipsis overflow-hidden">
+                {user.username}
+              </span>
             </div>
             <Form method="post" action="/logout">
               <button

@@ -19,7 +19,7 @@ export const action: ActionFunction = async ({
     where: { id: postId },
   });
 
-  if (post?.authorId !== userId) {
+  if (!post) {
     throw json('Cant find this post anymore.', {
       status: 404,
     });

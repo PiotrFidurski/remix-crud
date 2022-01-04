@@ -16,7 +16,7 @@ export const DropdownItem = React.forwardRef<
     <Item
       ref={ref}
       className={clsx(
-        'hover:cursor-pointer hover:bg-violet-700 focus:outline-none focus:bg-violet-700 rounded-md text-gray-300',
+        'hover:cursor-pointer w-full hover:bg-violet-700 focus:outline-none focus:bg-violet-700 rounded-md text-gray-300',
         className
       )}
       {...props}

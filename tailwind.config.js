@@ -6,7 +6,7 @@ module.exports = {
     extend: {
       colors: {
         gray: {
-          dark: '#121212',
+          background: '#121212',
         },
         black: {
           default: '#080606',
@@ -23,30 +23,8 @@ module.exports = {
           ...defaultTheme.fontFamily.sans,
         ],
       },
-      minHeight: {
-        100: '100px',
-        200: '200px',
-        600: '600px',
-      },
-      minWidth: {
-        180: '180px',
-        200: '200px',
-      },
-      maxWidth: {
-        76: '76px',
-        200: '200px',
-      },
       dropShadow: {
         light: '0 1px 5px rgba(255 255 255 / 0.10)',
-      },
-      translate: {
-        minus100: '-100%',
-      },
-      gridRow: {
-        none: 'none',
-      },
-      visivility: {
-        collapse: 'collapse',
       },
     },
   },

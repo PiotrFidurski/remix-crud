@@ -13,7 +13,7 @@ export const Button = React.forwardRef<
       type="button"
       ref={ref}
       className={clsx(
-        'rounded-full text-gray-300 bg-transparent py-2 px-2 hover:bg-white-10 border-2 focus-visible:border-2 focus-visible:border-violet-700 focus-visible:outline-none focus-visible:bg-white-10',
+        'rounded-full text-gray-300 bg-transparent py-2 px-2 border-2 button-hover',
         className
       )}
       {...props}

@@ -1,27 +1,34 @@
-import {
-  ActionFunction,
-  Form,
-  Link,
-  useActionData,
-  useSearchParams,
-  useTransition,
-} from 'remix';
-import { ZodError } from 'zod';
-import { Button } from '~/components/Elements';
-import { InputField } from '~/components/Form';
+import { ActionFunction, Link } from 'remix';
+import * as z from 'zod';
 import {
   createUserSession,
   login,
-  schema,
+  LoginForm,
 } from '~/features/auth';
-import { LoginActionData } from '~/types';
 import { badRequest } from '~/utils/badRequest';
 import { db } from '~/utils/db.server';
+
+export const schema = z.object({
+  username: z
+    .string({ invalid_type_error: 'Username is required.' })
+    .min(
+      5,
+      'Username should be at least 5 characters long.'
+    )
+    .max(
+      25,
+      'Username should be maximum of 25 characters long.'
+    ),
+  password: z
+    .string({ invalid_type_error: 'Password is required.' })
+    .min(8, 'Password must be at least 8 characters long.'),
+});
 
 export const action: ActionFunction = async ({
   request,
 }) => {
   const form = await request.formData();
+
   const redirectTo =
     (form.get('redirectTo') as string) || '/';
   const username = form.get('username') as string;
@@ -60,7 +67,7 @@ export const action: ActionFunction = async ({
       redirectTo,
     });
   } catch (error) {
-    const errors = (error as ZodError).flatten();
+    const errors = (error as z.ZodError).flatten();
 
     return badRequest({
       fieldErrors: {
@@ -72,87 +79,20 @@ export const action: ActionFunction = async ({
 };
 
 export default function LoginRoute() {
-  const actionData = useActionData<LoginActionData>();
-
-  const transition = useTransition();
-
-  const [searchParams] = useSearchParams();
-
   return (
-    <div className="bg-black-default flex justify-center rounded-md p-2 min-h-screen">
-      <Form
-        aria-describedby={
-          actionData?.formError
-            ? 'form-error-message'
-            : undefined
-        }
-        method="post"
-        className="max-w-xl w-full m-auto flex flex-col text-gray-300"
-      >
-        <input
-          type="hidden"
-          name="redirectTo"
-          value={
-            searchParams.get('redirectTo') ?? undefined
-          }
-        />
-        <h1 className="font-bold text-4xl py-4 text-violet-700">
-          Login
-        </h1>
-        <InputField
-          errorMessage={actionData?.fieldErrors?.username}
-          type="text"
-          name="username"
-          htmlFor="username"
-          minLength={5}
-          required
-          aria-invalid={Boolean(
-            actionData?.fieldErrors?.username
-          )}
-          aria-describedby={
-            actionData?.fieldErrors?.username
-              ? 'username-error'
-              : undefined
-          }
-        >
-          Username
-        </InputField>
-        <InputField
-          errorMessage={actionData?.fieldErrors?.password}
-          type="password"
-          name="password"
-          htmlFor="password"
-          minLength={8}
-          required
-          aria-invalid={Boolean(
-            actionData?.fieldErrors?.password
-          )}
-          aria-describedby={
-            actionData?.fieldErrors?.password
-              ? 'password-error'
-              : undefined
-          }
-        >
-          Password
-        </InputField>
-        <Button type="submit" className="border-violet-700">
-          {transition.submission
-            ? 'logging in...'
-            : 'Login'}
-        </Button>
-        {actionData?.formError}
-        <div className="flex justify-center">
-          <h2 className="py-2 text-xl ">
-            Don&apos;t have an account? register{' '}
-            <Link
-              to="/register"
-              className="underline text-violet-600 underline-offset-1"
-            >
-              here
-            </Link>
-          </h2>
-        </div>
-      </Form>
+    <div className="bg-black-default flex flex-col justify-center rounded-md p-2 text-gray-300">
+      <LoginForm />
+      <div className="flex justify-center">
+        <h2 className="py-6 text-xl">
+          Don&apos;t have an account? register{' '}
+          <Link
+            to="/register"
+            className="underline text-violet-600 underline-offset-1"
+          >
+            here
+          </Link>
+        </h2>
+      </div>
     </div>
   );
 }

@@ -8,6 +8,7 @@ import {
   ArrowRightIcon,
   DeleteIcon,
   DotsHorizontalIcon,
+  PencilIcon,
 } from '~/components/Icons';
 
 type PostDropdownProps = {
@@ -34,7 +35,7 @@ export function PostDropdown({
       </DropdownMenu.Trigger>
       <DropdownMenu.Content
         loop
-        className="w-full flex flex-col gap-1 items-start drop-shadow-light bg-black-default text-white rounded-md px-2 py-4"
+        className="w-full flex min-w-[200px] flex-col gap-1 items-start drop-shadow-light bg-black-default text-white rounded-md px-2 py-4"
       >
         <DropdownMenu.Label className="text-slate-700 text-xs px-2">
           <span>Options</span>
@@ -42,7 +43,7 @@ export function PostDropdown({
         <DropdownMenu.Separator className="bg-white w-full h-px my-2 bg-white-10" />
         <Link
           to={`/posts/${postId}`}
-          className="min-w-200 w-full items-center text-sm"
+          className="w-full items-center text-sm"
         >
           <DropdownItem className="flex justify-between px-2 py-1">
             <span>Read more</span>
@@ -56,11 +57,11 @@ export function PostDropdown({
         {canModify ? (
           <Link
             to={`/posts/${postId}/edit`}
-            className="min-w-200 w-full items-center text-sm"
+            className="w-full items-center text-sm"
           >
             <DropdownItem className="flex justify-between px-2 py-1">
               <span>Edit</span>
-              <ArrowRightIcon
+              <PencilIcon
                 aria-hidden="true"
                 className="w-5 h-5"
               />
@@ -69,9 +70,13 @@ export function PostDropdown({
         ) : null}
         {canModify &&
         location.pathname === `/posts/${postId}` ? (
-          <button type="button" onClick={onDelete}>
+          <button
+            type="button"
+            onClick={onDelete}
+            className="w-full"
+          >
             <DropdownItem className="hover:bg-error focus:bg-error">
-              <div className="px-2 py-1 min-w-200 w-full flex justify-between items-center text-sm">
+              <div className="px-2 py-1 w-full flex justify-between items-center text-sm">
                 <span>Delete</span>
                 <DeleteIcon
                   aria-hidden="true"
