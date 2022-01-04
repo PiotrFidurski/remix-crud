@@ -1,5 +1,5 @@
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
-import { Form, Link, useLocation, useSubmit } from 'remix';
+import { Form, Link, useLocation } from 'remix';
 import {
   Button,
   DropdownItem,
@@ -21,8 +21,6 @@ export function PostDropdown({
   postId,
 }: PostDropdownProps) {
   const location = useLocation();
-
-  const submit = useSubmit();
 
   return (
     <DropdownMenu.Root>
@@ -76,12 +74,11 @@ export function PostDropdown({
             action={`/posts/${postId}/delete`}
             method="post"
           >
-            <button
-              type="submit"
-              onClick={(e) => submit(e.currentTarget)}
-              className="w-full"
-            >
-              <DropdownItem className="hover:bg-error focus:bg-error">
+            <button type="submit" className="w-full">
+              <DropdownItem
+                onSelect={(e) => e.preventDefault()}
+                className="hover:bg-error focus:bg-error"
+              >
                 <div className="px-2 py-1 w-full flex justify-between items-center text-sm">
                   <span>Delete</span>
                   <DeleteIcon

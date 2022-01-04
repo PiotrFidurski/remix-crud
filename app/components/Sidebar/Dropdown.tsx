@@ -1,5 +1,5 @@
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
-import { Form, useSubmit } from 'remix';
+import { Form } from 'remix';
 import { Button, DropdownItem } from '../Elements';
 import {
   DotsHorizontalIcon,
@@ -9,8 +9,6 @@ import {
 } from '../Icons';
 
 export default function Dropdown() {
-  const submit = useSubmit();
-
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>
@@ -53,14 +51,10 @@ export default function Dropdown() {
           method="post"
           className="w-full"
         >
-          <button
-            className="w-full"
-            type="submit"
-            onClick={(e) => submit(e.currentTarget)}
-          >
+          <button className="w-full" type="submit">
             <DropdownItem
+              onSelect={(e) => e.preventDefault()}
               className="hover:bg-error focus:bg-error"
-              asChild
             >
               <div className="px-2 py-1 flex justify-between items-center text-sm">
                 <span>Logout</span>
