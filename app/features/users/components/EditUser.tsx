@@ -9,10 +9,10 @@ import {
   InputField,
   TextareaField,
 } from '~/components/Form';
-import { ActionData, LoaderData } from '../types';
+import { EditActionData, LoaderData } from '../types';
 
 export function EditUser() {
-  const actionData = useActionData<ActionData>();
+  const actionData = useActionData<EditActionData>();
 
   const data = useLoaderData<LoaderData>();
 

@@ -4,7 +4,7 @@ export type LoaderData = {
   user: User;
 };
 
-export type ActionData = {
+export type EditActionData = {
   formError?: string;
   fieldErrors?: {
     username: string | undefined;
