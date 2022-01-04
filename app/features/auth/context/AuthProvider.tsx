@@ -1,6 +1,6 @@
 import { User } from '@prisma/client';
 import * as React from 'react';
-import { AuthContext } from './AuthContext';
+import { AuthContext } from './authContext';
 
 type AuthProviderProps = {
   children: React.ReactNode;
