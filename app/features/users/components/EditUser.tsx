@@ -43,6 +43,7 @@ export function EditUser() {
         Username
       </InputField>
       <TextareaField
+        defaultValue={data?.user?.bio!}
         errorMessage={actionData?.fieldErrors?.bio}
         htmlFor="bio"
         name="bio"

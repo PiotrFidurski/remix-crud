@@ -8,6 +8,7 @@ type TextareaFieldProps =
   React.TextareaHTMLAttributes<HTMLTextAreaElement> &
     FieldWrapperPassThroughProps & {
       errorMessage?: string;
+      text?: string;
     };
 
 export function TextareaField({

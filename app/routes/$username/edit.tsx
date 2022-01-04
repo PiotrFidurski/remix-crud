@@ -25,7 +25,7 @@ const schema = z.object({
     .optional(),
   bio: z
     .string()
-    .min(20, 'Bio should be at least 20 characters long.')
+    .min(0, 'Bio should be at least 20 characters long.')
     .max(
       200,
       'Bio should be maximum of 200 characters long.'
@@ -67,7 +67,7 @@ export const action: ActionFunction = async ({
 
     const fields = {
       username: formUsername ?? user.username,
-      bio: bio ?? user.bio,
+      bio: bio ?? '',
     };
 
     schema.parse({
