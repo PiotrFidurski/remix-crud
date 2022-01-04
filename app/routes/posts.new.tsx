@@ -1,30 +1,37 @@
 import {
   ActionFunction,
-  Form,
   LoaderFunction,
   redirect,
   useActionData,
   useTransition,
 } from 'remix';
-import { ZodError } from 'zod';
-import { Button } from '~/components/Elements';
-import {
-  InputField,
-  TextareaField,
-} from '~/components/Form';
+import * as z from 'zod';
 import { requireUserId, useUser } from '~/features/auth';
-import { PostComponent } from '~/features/posts';
-import { createPostSchema } from '~/features/posts/utils/schemas';
+import {
+  ActionData,
+  CreatePost,
+  PostComponent,
+} from '~/features/posts';
+import { composeOptimisticPost } from '~/features/posts/utils/composeOptimisticPost';
 import { badRequest } from '~/utils/badRequest';
 import { db } from '~/utils/db.server';
 
-type ActionData = {
-  formError?: string;
-  fieldErrors?: {
-    title: string | undefined;
-    content: string | undefined;
-  };
-};
+export const schema = z.object({
+  title: z
+    .string({ invalid_type_error: 'title is required.' })
+    .min(5, 'title should be at least 5 characters.')
+    .max(30, 'title should have maximum of 30 characters'),
+
+  content: z
+    .string({
+      invalid_type_error: 'content is required.',
+    })
+    .min(50, 'content should be at least 50 characters')
+    .max(
+      300,
+      'content should have maximum of 300 characters'
+    ),
+});
 
 export const loader: LoaderFunction = async ({
   request,
@@ -44,7 +51,7 @@ export const action: ActionFunction = async ({
   try {
     const userId = await requireUserId(request);
 
-    createPostSchema.parse({ title, content });
+    schema.parse({ title, content });
 
     const post = await db.post.create({
       data: {
@@ -56,7 +63,7 @@ export const action: ActionFunction = async ({
 
     return redirect(`/posts/${post.id}`);
   } catch (error) {
-    const errors = (error as ZodError).flatten();
+    const errors = (error as z.ZodError).flatten();
 
     return badRequest({
       fieldErrors: {
@@ -75,22 +82,10 @@ export default function NewPostRoute() {
   const { submission } = useTransition();
 
   if (!actionData?.fieldErrors && submission) {
-    const title = submission?.formData.get(
-      'title'
-    ) as string;
-    const content = submission?.formData.get(
-      'content'
-    ) as string;
-
-    const post = {
-      id: '',
-      content,
-      title,
-      author: user!,
-      authorId: user?.id,
-      createdAt: new Date(Date.now()),
-      updatedAt: new Date(Date.now()),
-    };
+    const post = composeOptimisticPost({
+      submission,
+      user,
+    });
 
     return (
       <div className="flex flex-col gap-4 w-full bg-black-default rounded-md px-4 py-8">
@@ -101,64 +96,7 @@ export default function NewPostRoute() {
 
   return (
     <div className="bg-black-default p-2 text-gray-300 min-h-screen flex justify-center">
-      <Form
-        aria-describedby={
-          actionData?.formError
-            ? 'form-error-message'
-            : undefined
-        }
-        method="post"
-        className="flex px-2 flex-col max-w-2xl w-full m-auto"
-      >
-        <h1 className="font-bold text-4xl py-4 text-violet-700">
-          Create new post
-        </h1>
-        <InputField
-          errorMessage={actionData?.fieldErrors?.title}
-          htmlFor="title"
-          type="text"
-          name="title"
-          required
-          minLength={5}
-          maxLength={30}
-          aria-invalid={Boolean(
-            actionData?.fieldErrors?.title
-          )}
-          aria-describedby={
-            actionData?.fieldErrors?.title
-              ? 'username-error'
-              : undefined
-          }
-        >
-          Title
-        </InputField>
-        <TextareaField
-          errorMessage={actionData?.fieldErrors?.content}
-          name="content"
-          htmlFor="content"
-          required
-          minLength={50}
-          maxLength={300}
-          aria-invalid={Boolean(
-            actionData?.fieldErrors?.content
-          )}
-          aria-describedby={
-            actionData?.fieldErrors?.content
-              ? 'username-error'
-              : undefined
-          }
-        >
-          Content
-        </TextareaField>
-        <div className="mt-4 flex justify-end">
-          <Button
-            type="submit"
-            className="border-2 border-violet-700 px-6"
-          >
-            Create
-          </Button>
-        </div>
-      </Form>
+      <CreatePost />
     </div>
   );
 }

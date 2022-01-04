@@ -9,16 +9,35 @@ import {
   useLoaderData,
   useTransition,
 } from 'remix';
-import { ZodError } from 'zod';
+import * as z from 'zod';
 import { Button } from '~/components/Elements';
 import {
   InputField,
   TextareaField,
 } from '~/components/Form';
 import { requireUserId } from '~/features/auth';
-import { updateUserSchema } from '~/features/users/utils/schemas';
 import { badRequest } from '~/utils/badRequest';
 import { db } from '~/utils/db.server';
+
+const schema = z.object({
+  username: z
+    .string({ invalid_type_error: 'Username is required.' })
+    .min(
+      5,
+      'Username should be at least 5 characters long.'
+    )
+    .max(
+      25,
+      'Username should be maximum of 25 characters long.'
+    ),
+  bio: z
+    .string()
+    .min(20, 'Bio should be at least 20 characters long.')
+    .max(
+      200,
+      'Bio should be maximum of 200 characters long.'
+    ),
+});
 
 export type ActionData = {
   formError?: string;
@@ -64,7 +83,7 @@ export const action: ActionFunction = async ({
       });
     }
 
-    updateUserSchema.parse({ username: formUsername, bio });
+    schema.parse({ username: formUsername, bio });
 
     const existingUser = await db.user.findFirst({
       where: { username: formUsername },
@@ -85,7 +104,7 @@ export const action: ActionFunction = async ({
 
     return redirect(`/${formUsername}`);
   } catch (error) {
-    const errors = (error as ZodError).flatten();
+    const errors = (error as z.ZodError).flatten();
 
     return badRequest({
       fieldErrors: {
