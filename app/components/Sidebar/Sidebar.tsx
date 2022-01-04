@@ -69,7 +69,10 @@ export function Sidebar() {
               </span>
             </>
           ) : (
-            <Button onClick={handleToggleMenu}>
+            <Button
+              onClick={handleToggleMenu}
+              className="rounded-full border-transparent"
+            >
               <ArrowLeftIcon />
             </Button>
           )}
@@ -86,7 +89,7 @@ export function Sidebar() {
       >
         <div className="lg:hidden flex rounded-t-lg text-gray-300 absolute top-0 border-b border-white-10 left-0 right-0 py-2 px-4">
           <Button
-            className="border-transparent"
+            className="border-transparent rounded-full"
             onClick={handleToggleMenu}
             aria-controls="menu"
             aria-label={
