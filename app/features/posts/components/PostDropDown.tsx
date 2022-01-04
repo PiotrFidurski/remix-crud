@@ -27,7 +27,7 @@ export function PostDropdown({
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>
         <Button
-          className="border-transparent"
+          className="rounded-full border-transparent"
           aria-label="open menu"
         >
           <DotsHorizontalIcon />

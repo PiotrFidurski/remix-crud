@@ -17,7 +17,7 @@ export default function Dropdown({
       <DropdownMenu.Trigger asChild>
         <Button
           type="button"
-          className="border-transparent"
+          className="rounded-full border-transparent"
           aria-label="open dropdown"
         >
           <DotsHorizontalIcon />

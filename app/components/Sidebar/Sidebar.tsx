@@ -50,7 +50,7 @@ export function Sidebar() {
           {user ? (
             <>
               <Button
-                className="flex mr-2 border-transparent"
+                className="flex mr-2 border-transparent rounded-full"
                 aria-controls="menu"
                 aria-label={
                   expanded ? 'close menu' : 'open menu'

@@ -59,7 +59,7 @@ export function EditUser() {
         Bio
       </TextareaField>
       <Button
-        className="border-2 border-violet-700"
+        className="border-2 border-violet-700 rounded-full"
         type="submit"
       >
         {submission ? 'Updating...' : 'Update'}

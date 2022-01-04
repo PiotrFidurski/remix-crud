@@ -52,7 +52,7 @@ export default function UsernameRoute() {
       <UserComponent user={user!} />
       <div className="w-full flex justify-between border-t border-b border-white-10">
         <Button
-          className="flex-1 rounded-none px-0 py-0 border-0 border-transparent border-r-white-10 border-r-[1px]"
+          className="flex-1 px-0 py-0 border-0 border-transparent border-r-white-10 border-r-[1px]"
           tabIndex={-1}
         >
           <NavLink to="." className="w-full flex">
@@ -72,7 +72,7 @@ export default function UsernameRoute() {
         </Button>
         {authUser?.id === user?.id ? (
           <Button
-            className="flex-1 rounded-none px-0 py-0 border-0"
+            className="flex-1 rounded-none px-0 py-0 border-none"
             tabIndex={-1}
           >
             <NavLink to="edit" className="w-full flex">
