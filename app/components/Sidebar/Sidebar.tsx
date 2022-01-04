@@ -23,19 +23,25 @@ export function Sidebar() {
   const submitBtnRef =
     React.useRef<HTMLButtonElement | null>(null);
 
-  const handleToggleMenu = React.useCallback(() => {
+  const handleToggleMenu = () => {
     setExpanded(!expanded);
-  }, [expanded]);
+  };
 
   const handleLogout = () => {
     submitBtnRef.current?.click();
   };
 
   React.useEffect(() => {
+    /* 
+      Whenever transition.state changes and the menu is already opened, we will
+      close the menu for mobile users to prevent menu hanging around after user
+      performs an action
+    */
+
     if (transition.state === 'loading' && expanded) {
-      handleToggleMenu();
+      setExpanded(false);
     }
-  }, [transition.state, expanded, handleToggleMenu]);
+  }, [transition.state, expanded]);
 
   return (
     <>
