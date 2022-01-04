@@ -1,22 +1,13 @@
-import {
-  ActionFunction,
-  Form,
-  Link,
-  useActionData,
-  useSearchParams,
-  useTransition,
-} from 'remix';
+import { ActionFunction, Link } from 'remix';
 import { ZodError } from 'zod';
-import { Button } from '~/components/Elements';
-import { InputField } from '~/components/Form';
 import {
   createUserSession,
   register,
+  RegisterForm,
 } from '~/features/auth';
-import { createUserSchema } from '~/features/users/utils/schemas';
-import { LoginActionData } from '~/types';
 import { badRequest } from '~/utils/badRequest';
 import { db } from '~/utils/db.server';
+import { schema } from './login';
 
 export const action: ActionFunction = async ({
   request,
@@ -29,7 +20,7 @@ export const action: ActionFunction = async ({
   const password = form.get('password') as string;
 
   try {
-    createUserSchema.parse({ username, password });
+    schema.parse({ username, password });
 
     const existingUser = await db.user.findFirst({
       where: { username: username.toLowerCase() },
@@ -73,71 +64,20 @@ export const action: ActionFunction = async ({
 };
 
 export default function RegisterRoute() {
-  const actionData = useActionData<LoginActionData>();
-
-  const transition = useTransition();
-
-  const [searchParams] = useSearchParams();
-
   return (
-    <div className="bg-black-default flex justify-center rounded-md p-2 min-h-screen">
-      <Form
-        aria-describedby={
-          actionData?.formError
-            ? 'form-error-message'
-            : undefined
-        }
-        method="post"
-        className="max-w-xl w-full m-auto flex flex-col text-gray-300"
-      >
-        <input
-          type="hidden"
-          name="redirectTo"
-          value={
-            searchParams.get('redirectTo') ?? undefined
-          }
-        />
-        <h1 className="font-bold text-4xl py-4 text-violet-700">
-          Register
-        </h1>
-        <InputField
-          errorMessage={actionData?.fieldErrors?.username}
-          type="text"
-          name="username"
-          htmlFor="username"
-          minLength={5}
-          required
-        >
-          Username
-        </InputField>
-        <InputField
-          errorMessage={actionData?.fieldErrors?.password}
-          type="password"
-          name="password"
-          htmlFor="password"
-          minLength={8}
-          required
-        >
-          Password
-        </InputField>
-        <Button type="submit" className="border-violet-700">
-          {transition.submission
-            ? 'logging in...'
-            : 'Register'}
-        </Button>
-        {actionData?.formError}
-        <div className="flex justify-center">
-          <h2 className="py-2 text-xl ">
-            Already have an account? login{' '}
-            <Link
-              to="/login"
-              className="underline text-violet-600 underline-offset-1"
-            >
-              here
-            </Link>
-          </h2>
-        </div>
-      </Form>
+    <div className="bg-black-default flex text-gray-300 flex-col rounded-md p-2">
+      <RegisterForm />
+      <div className="flex justify-center">
+        <h2 className="py-6 text-xl">
+          Already have an account? login{' '}
+          <Link
+            to="/login"
+            className="underline text-violet-600 underline-offset-1"
+          >
+            here
+          </Link>
+        </h2>
+      </div>
     </div>
   );
 }
