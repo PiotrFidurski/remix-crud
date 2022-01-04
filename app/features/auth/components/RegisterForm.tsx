@@ -6,7 +6,7 @@ import {
 } from 'remix';
 import { Button } from '~/components/Elements';
 import { InputField } from '~/components/Form';
-import { LoginActionData } from './LoginForm';
+import { LoginActionData } from '../types';
 
 export function RegisterForm() {
   const actionData = useActionData<LoginActionData>();

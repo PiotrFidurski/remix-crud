@@ -8,12 +8,11 @@ import {
 } from 'remix';
 import { ZodError } from 'zod';
 import { requireUserId, useUser } from '~/features/auth';
+import { EditPost, PostComponent } from '~/features/posts';
 import {
   ActionData,
-  EditPost,
   LoaderData,
-  PostComponent,
-} from '~/features/posts';
+} from '~/features/posts/types';
 import { composeOptimisticPost } from '~/features/posts/utils/composeOptimisticPost';
 import { badRequest } from '~/utils/badRequest';
 import { db } from '~/utils/db.server';
@@ -103,7 +102,7 @@ export default function EditPostRoute() {
 
   const { submission } = useTransition();
 
-  if (!actionData?.fieldErrors && submission) {
+  if (!actionData?.fieldErrors! && submission) {
     const post = composeOptimisticPost({
       submission,
       user,

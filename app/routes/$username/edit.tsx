@@ -1,21 +1,13 @@
-import { User } from '@prisma/client';
 import {
   ActionFunction,
-  Form,
   json,
   LoaderFunction,
   redirect,
-  useActionData,
-  useLoaderData,
-  useTransition,
 } from 'remix';
 import * as z from 'zod';
-import { Button } from '~/components/Elements';
-import {
-  InputField,
-  TextareaField,
-} from '~/components/Form';
 import { requireUserId } from '~/features/auth';
+import { EditUser } from '~/features/users';
+import { LoaderData } from '~/features/users/types';
 import { badRequest } from '~/utils/badRequest';
 import { db } from '~/utils/db.server';
 
@@ -38,18 +30,6 @@ const schema = z.object({
       'Bio should be maximum of 200 characters long.'
     ),
 });
-
-export type ActionData = {
-  formError?: string;
-  fieldErrors?: {
-    username: string | undefined;
-    bio: string | undefined;
-  };
-};
-
-type LoaderData = {
-  user: User;
-};
 
 export const action: ActionFunction = async ({
   request,
@@ -139,63 +119,9 @@ export const loader: LoaderFunction = async ({
 };
 
 export default function UsernameEditRoute() {
-  const data = useLoaderData<LoaderData>();
-
-  const actionData = useActionData<ActionData>();
-
-  const { submission } = useTransition();
-
   return (
     <div className="px-6 max-w-2xl m-auto">
-      <Form method="post" className="flex flex-col gap-4">
-        <h1 className="font-bold text-4xl py-4 text-violet-700">
-          Edit your profile
-        </h1>
-        <InputField
-          errorMessage={actionData?.fieldErrors?.username}
-          htmlFor="username"
-          defaultValue={data.user.username}
-          type="text"
-          name="username"
-          minLength={5}
-          maxLength={25}
-          required
-          aria-invalid={Boolean(
-            actionData?.fieldErrors?.username
-          )}
-          aria-describedby={
-            actionData?.fieldErrors?.username
-              ? 'username-error'
-              : undefined
-          }
-        >
-          Username
-        </InputField>
-        <TextareaField
-          errorMessage={actionData?.fieldErrors?.bio}
-          defaultValue={data.user.bio!}
-          htmlFor="bio"
-          name="bio"
-          minLength={20}
-          maxLength={200}
-          aria-invalid={Boolean(
-            actionData?.fieldErrors?.bio
-          )}
-          aria-describedby={
-            actionData?.fieldErrors?.bio
-              ? 'bio-error'
-              : undefined
-          }
-        >
-          Bio
-        </TextareaField>
-        <Button
-          className="border-2 border-violet-700"
-          type="submit"
-        >
-          {submission ? 'Updating...' : 'Update'}
-        </Button>
-      </Form>
+      <EditUser />
     </div>
   );
 }

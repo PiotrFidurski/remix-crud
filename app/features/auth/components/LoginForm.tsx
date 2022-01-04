@@ -6,14 +6,7 @@ import {
 } from 'remix';
 import { Button } from '~/components/Elements';
 import { InputField } from '~/components/Form';
-
-export type LoginActionData = {
-  formError?: string;
-  fieldErrors?: {
-    username: string | undefined;
-    password: string | undefined;
-  };
-};
+import { LoginActionData } from '../types';
 
 export function LoginForm() {
   const actionData = useActionData<LoginActionData>();

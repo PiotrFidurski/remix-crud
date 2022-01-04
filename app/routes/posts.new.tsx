@@ -8,10 +8,10 @@ import {
 import * as z from 'zod';
 import { requireUserId, useUser } from '~/features/auth';
 import {
-  ActionData,
   CreatePost,
   PostComponent,
 } from '~/features/posts';
+import { ActionData } from '~/features/posts/types';
 import { composeOptimisticPost } from '~/features/posts/utils/composeOptimisticPost';
 import { badRequest } from '~/utils/badRequest';
 import { db } from '~/utils/db.server';
@@ -81,7 +81,7 @@ export default function NewPostRoute() {
 
   const { submission } = useTransition();
 
-  if (!actionData?.fieldErrors && submission) {
+  if (!actionData?.fieldErrors! && submission) {
     const post = composeOptimisticPost({
       submission,
       user,

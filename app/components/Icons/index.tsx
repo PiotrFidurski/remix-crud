@@ -11,4 +11,3 @@ export * from './PlusIcon';
 export * from './ProfileIcon';
 export * from './SadEmojiIcon';
 export * from './SettingsIcon';
-export * from './types';
