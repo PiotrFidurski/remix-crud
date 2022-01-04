@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Form } from 'remix';
+import { Form, useTransition } from 'remix';
 import { useUser } from '~/features/auth';
 import { Button, ListItem } from '../Elements';
 import {
@@ -16,18 +16,26 @@ import { Link } from './Link';
 export function Sidebar() {
   const [expanded, setExpanded] = React.useState(false);
 
+  const transition = useTransition();
+
   const user = useUser();
 
   const submitBtnRef =
     React.useRef<HTMLButtonElement | null>(null);
 
-  const handleToggleMenu = () => {
+  const handleToggleMenu = React.useCallback(() => {
     setExpanded(!expanded);
-  };
+  }, [expanded]);
 
   const handleLogout = () => {
     submitBtnRef.current?.click();
   };
+
+  React.useEffect(() => {
+    if (transition.state === 'loading' && expanded) {
+      handleToggleMenu();
+    }
+  }, [transition.state, expanded, handleToggleMenu]);
 
   return (
     <>
