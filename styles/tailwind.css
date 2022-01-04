@@ -18,7 +18,7 @@
 
 @layer utilities {
   .button-hover {
-    @apply hover:bg-white-10 border-2 focus-visible:border-2 focus-visible:border-violet-500 focus-visible:outline-none focus-visible:bg-white-10;
+    @apply hover:bg-white-10 focus-visible:border-2 focus-visible:border-violet-500 focus-visible:outline-none focus-visible:bg-white-10;
   }
 
   .focus-ring {

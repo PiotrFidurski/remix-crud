@@ -60,11 +60,11 @@ export function PostComponent({ post }: PostProps) {
       </div>
       <div className="flex gap-2">
         <img
-          className="object-cover rounded-bl max-w-[200px] w-full hidden lg:block"
-          alt="husky with a santa hat"
-          src="/images/xmasdog.png"
+          className="object-cover border-violet-700 border-2 m-2 rounded-full max-w-[60px] max-h-[60px] h-auto w-full"
+          alt="user avatar"
+          src="/images/avatar.png"
         />
-        <div className="py-4 px-4 w-auto break-all">
+        <div className="py-4 pl-0 pr-6 w-auto break-all">
           <h1 className="text-gray-400 font-bold text-xl pb-2">
             <Link to={`/posts/${post.id}`}>
               {post.title}

@@ -7,7 +7,7 @@ export type UserProps = {
 
 export function UserComponent({ user }: UserProps) {
   return (
-    <div className="flex items-start flex-col lg:flex-row gap-4 border-b border-white-10 mb-2 px-4 py-6">
+    <div className="flex items-start flex-col lg:flex-row gap-4 mb-2 px-4 py-6">
       <div className="flex min-w-[180px] border-r border-white-10">
         <img
           className="w-40 h-40 object-cover rounded-full border-4 border-violet-700"
