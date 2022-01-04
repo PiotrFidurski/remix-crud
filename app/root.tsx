@@ -120,7 +120,7 @@ export function ErrorBoundary({ error }: { error: Error }) {
         <div className="bg-black-default">
           <div className="flex max-w-lg text-gray-300 flex-col justify-center min-h-screen m-auto gap-4 w-full rounded-md px-4 py-8">
             <div className="flex flex-col items-center text-red-400">
-              <SadEmojiIcon className="w-12 h-12" />
+              <SadEmojiIcon className="w-24 h-24" />
               <h1 className="py-2 text-3xl">
                 something went very wrong
               </h1>

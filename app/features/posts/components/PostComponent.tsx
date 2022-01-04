@@ -1,7 +1,7 @@
 import { Post, User } from '@prisma/client';
 import { formatDistanceToNow } from 'date-fns';
 import * as React from 'react';
-import { Form, Link } from 'remix';
+import { Link } from 'remix';
 import { useUser } from '~/features/auth';
 import { PostDropdown } from './PostDropDown';
 
@@ -12,14 +12,7 @@ export type PostProps = {
 export function PostComponent({ post }: PostProps) {
   const user = useUser();
 
-  const submitBtnRef =
-    React.useRef<HTMLButtonElement | null>(null);
-
   const isOwner = post?.authorId === user?.id;
-
-  const handleLogout = () => {
-    submitBtnRef?.current?.click();
-  };
 
   return (
     <article
@@ -41,22 +34,11 @@ export function PostComponent({ post }: PostProps) {
             })}
           </p>
         </div>
-        <Form
-          method="post"
-          action={`/posts/${post.id}/delete`}
-        >
-          <button
-            ref={submitBtnRef}
-            type="submit"
-            aria-label="logout"
-            hidden
-          />
-          <PostDropdown
-            onDelete={handleLogout}
-            canModify={isOwner}
-            postId={post.id}
-          />
-        </Form>
+
+        <PostDropdown
+          canModify={isOwner}
+          postId={post.id}
+        />
       </div>
       <div className="flex gap-2">
         <img

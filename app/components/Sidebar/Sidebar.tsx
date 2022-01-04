@@ -20,15 +20,8 @@ export function Sidebar() {
 
   const user = useUser();
 
-  const submitBtnRef =
-    React.useRef<HTMLButtonElement | null>(null);
-
   const handleToggleMenu = () => {
     setExpanded(!expanded);
-  };
-
-  const handleLogout = () => {
-    submitBtnRef.current?.click();
   };
 
   React.useEffect(() => {
@@ -169,15 +162,7 @@ export function Sidebar() {
                 {user.username}
               </span>
             </div>
-            <Form method="post" action="/logout">
-              <button
-                ref={submitBtnRef}
-                type="submit"
-                aria-label="logout"
-                hidden
-              />
-              <Dropdown onLogout={handleLogout} />
-            </Form>
+            <Dropdown />
           </div>
         ) : null}
       </nav>
