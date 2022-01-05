@@ -13,7 +13,7 @@ import { useUser } from '~/features/auth';
 import { UserComponent } from '~/features/users';
 import { db } from '~/utils/db.server';
 
-type LoaderData = {
+export type LoaderData = {
   user: User | null;
 };
 

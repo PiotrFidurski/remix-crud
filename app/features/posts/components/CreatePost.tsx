@@ -62,7 +62,7 @@ export function CreatePost() {
       <div className="mt-4 flex justify-end">
         <Button
           type="submit"
-          className="border-2 border-violet-700 px-6"
+          className="rounded-full border-violet-700 px-6"
         >
           Create
         </Button>

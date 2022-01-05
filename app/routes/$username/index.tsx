@@ -1,7 +1,33 @@
 import { Post, User } from '@prisma/client';
-import { LoaderFunction, useLoaderData } from 'remix';
+import {
+  LoaderFunction,
+  MetaFunction,
+  useLoaderData,
+} from 'remix';
 import { PostComponent } from '~/features/posts';
 import { db } from '~/utils/db.server';
+import avatarImg from '../../../public/images/avatar.png';
+
+export const meta: MetaFunction = ({ parentsData }) => {
+  const { user } = parentsData['routes/$username'];
+
+  const title = user.username;
+  const description = user.bio;
+
+  return {
+    title: user.username,
+    description: user.bio,
+    'twitter:image': avatarImg,
+    'twitter:card': 'summary',
+    'twitter:creator': '@Chimiz_',
+    'twitter:site': '@Chimiz_',
+    'twitter:title': title,
+    'twitter:description': description,
+    'og:image': avatarImg,
+    'og:title': title,
+    'og:description': description,
+  };
+};
 
 type LoaderData = {
   posts: Array<Post & { author: User }>;
