@@ -1,34 +1,60 @@
-# Welcome to Remix!
+# Blogo
 
-- [Remix Docs](https://remix.run/docs)
+## Table of Contents
 
-## Deployment
+<details>
+<summary>Click to expand</summary>
+  
+- [Introduction](#introduction)  
+  
+- [Stack](#stack)
 
-After having run the `create-remix` command and selected "Vercel" as a deployment target, you only need to [import your Git repository](https://vercel.com/new) into Vercel, and it will be deployed.
+- [Environment Variables](#environment-variables)
 
-If you'd like to avoid using a Git repository, you can also deploy the directory by running [Vercel CLI](https://vercel.com/cli):
+- [Run locally](#run-locally)
 
-```sh
-npm i -g vercel
-vercel
-```
+- [Credits](#credits)
 
-It is generally recommended to use a Git repository, because future commits will then automatically be deployed by Vercel, through its [Git Integration](https://vercel.com/docs/concepts/git).
+</details>
 
-## Development
+## Introduction
 
-To run your Remix app locally, make sure your project's local dependencies are installed:
+[Blogo](https://remix-crud.vercel.app/) is a simple `CRUD` remix application where users are able to login/register, create posts, view posts, edit posts, delete posts. I used `Remix` paired with `zod` and `prisma` for majority of backend work, with prisma I went with `mongodb` connector (preview feature), for styling I used `tailwindcss`.
 
-```sh
-npm install
-```
+## Stack
 
-Afterwards, start the Remix development server like so:
+- `Typescript` 💕
+- `Remix` 💿
+- `Prisma` 📜
+- `Tailwindcss` for styling 👌
+- `radix-ui` for accessible dropdown component 👓
+- `zod` for validation ❌✔
 
-```sh
-npm run dev
-```
+## Environment variables
 
-Open up [http://localhost:3000](http://localhost:3000) and you should be ready to go!
+| Name           | Description              | Example                                                                                               |
+| -------------- | ------------------------ | ----------------------------------------------------------------------------------------------------- |
+| SESSION_SECRET | can be anything          | `verysecret`                                                                                          |
+| DATABASE_URL   | db connection url string | `mongodb+srv://username:password@cluster0.riogn.mongodb.net/databasename?retryWrites=true&w=majority` |
 
-If you're used to using the `vercel dev` command provided by [Vercel CLI](https://vercel.com/cli) instead, you can also use that, but it's not needed.
+## Run locally
+
+- Clone to your computer.
+
+  - `clone this repo`
+
+  - `cd remix-crud`
+
+  - `npm install`
+
+- Create .env.local in the root directory of your project, add env variables required.
+
+- Start a dev server
+
+  - `npm run dev`
+
+## Credits
+
+- Favicon and meta images
+
+  - [lukaszadam](https://lukaszadam.com/illustrations)
