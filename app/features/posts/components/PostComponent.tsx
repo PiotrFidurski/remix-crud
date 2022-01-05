@@ -1,6 +1,5 @@
 import { Post, User } from '@prisma/client';
 import { formatDistanceToNow } from 'date-fns';
-import * as React from 'react';
 import { Link } from 'remix';
 import { useUser } from '~/features/auth';
 import { PostDropdown } from './PostDropDown';

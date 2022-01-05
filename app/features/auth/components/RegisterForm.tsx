@@ -54,7 +54,10 @@ export function RegisterForm() {
       >
         Password
       </InputField>
-      <Button type="submit" className="border-violet-700">
+      <Button
+        type="submit"
+        className="border-violet-700 rounded-full"
+      >
         {submission ? 'logging in...' : 'Register'}
       </Button>
     </Form>
