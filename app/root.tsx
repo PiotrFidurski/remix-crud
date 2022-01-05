@@ -15,6 +15,7 @@ import {
   useLoaderData,
   useTransition,
 } from 'remix';
+import humanImg from '../public/images/human.png';
 import { SadEmojiIcon } from './components/Icons';
 import { Sidebar } from './components/Sidebar';
 import { AuthProvider } from './features/auth';
@@ -24,7 +25,22 @@ import styles from './tailwind.css';
 nProgress.configure({ showSpinner: false });
 
 export const meta: MetaFunction = () => {
-  return { title: 'New Remix App' };
+  const description =
+    'Share your experiences together with other people.';
+  return {
+    title: 'Blogo',
+    description,
+    keywords: 'experience,remix,post,blog,story',
+    'twitter:image': humanImg,
+    'twitter:card': 'summary',
+    'twitter:creator': '@Chimiz_',
+    'twitter:site': '@Chimiz_',
+    'twitter:title': 'Blogo',
+    'twitter:description': description,
+    'og:image': humanImg,
+    'og:title': 'Blogo',
+    'og:description': description,
+  };
 };
 
 export const links: LinksFunction = () => {
