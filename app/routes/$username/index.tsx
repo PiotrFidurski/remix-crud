@@ -8,15 +8,15 @@ import { PostComponent } from '~/features/posts';
 import { db } from '~/utils/db.server';
 import avatarImg from '../../../public/images/avatar.png';
 
-export const meta: MetaFunction = ({ ...props }) => {
-  const title =
-    props.parentsData['routes/$username'].user.username;
-  const description =
-    props.parentsData['routes/$username'].user.bio;
+export const meta: MetaFunction = ({ parentsData }) => {
+  const { user } = parentsData['routes/$username'];
+
+  const title = user.username;
+  const description = user.bio;
 
   return {
-    title,
-    description,
+    title: user.username,
+    description: user.bio,
     'twitter:image': avatarImg,
     'twitter:card': 'summary',
     'twitter:creator': '@Chimiz_',
