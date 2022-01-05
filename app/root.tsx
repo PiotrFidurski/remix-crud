@@ -15,7 +15,7 @@ import {
   useLoaderData,
   useTransition,
 } from 'remix';
-import humanImg from '../public/images/human.png';
+import writingImg from '../public/images/writing.png';
 import { SadEmojiIcon } from './components/Icons';
 import { Sidebar } from './components/Sidebar';
 import { AuthProvider } from './features/auth';
@@ -31,13 +31,13 @@ export const meta: MetaFunction = () => {
     title: 'Blogo',
     description,
     keywords: 'experience,remix,post,blog,story',
-    'twitter:image': humanImg,
+    'twitter:image': writingImg,
     'twitter:card': 'summary',
     'twitter:creator': '@Chimiz_',
     'twitter:site': '@Chimiz_',
     'twitter:title': 'Blogo',
     'twitter:description': description,
-    'og:image': humanImg,
+    'og:image': writingImg,
     'og:title': 'Blogo',
     'og:description': description,
   };
